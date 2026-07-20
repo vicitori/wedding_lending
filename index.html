@@ -165,41 +165,19 @@
   .route-body{position:relative;margin-top:80px;}
 
   /* ---- timeline ---- */
-  .timeline{position:relative;padding-left:72px;}
-  .timeline::before{
-    content:'';position:absolute;left:27px;top:28px;bottom:28px;width:1px;
-    background:linear-gradient(to bottom,var(--gold-soft),var(--gold) 20%,var(--gold) 80%,var(--gold-soft));
-  }
-  .tl-stop{position:relative;padding:0 0 80px;}
-  .tl-stop:last-child{padding-bottom:0;}
+  .timeline{position:relative;padding-left:0;max-width:520px;}
+  .tl-stop{padding:0 0 12px;margin:0 0 12px;border-bottom:1px solid var(--line);display:flex;align-items:baseline;gap:20px;}
+  .tl-stop:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0;}
 
-  /* dot */
-  .tl-dot{
-    position:absolute;left:-72px;top:8px;
-    width:8px;height:8px;
-    border-radius:50%;
-    background:var(--gold);
-    z-index:1;
-    margin-left:24px;
-  }
-
-  /* content */
   .tl-time{
-    font-family:var(--font-mono);font-size:12px;letter-spacing:0.12em;
-    text-transform:uppercase;color:var(--gold);margin:0 0 6px;
+    font-family:var(--font-serif);font-weight:600;
+    font-size:clamp(22px,3.4vw,28px);color:var(--pine-deep);
+    margin:0;white-space:nowrap;min-width:90px;
   }
   .tl-title{
-    font-family:var(--font-serif);font-weight:600;
-    font-size:clamp(20px,3.2vw,26px);color:var(--pine-deep);margin:0 0 10px;
-    line-height:1.3;
-  }
-
-
-  @media(min-width:900px){
-    .timeline{padding-left:96px;}
-    .timeline::before{left:35px;}
-    .tl-dot{left:-96px;width:8px;height:8px;margin-left:32px;}
-    .tl-stop{padding-bottom:88px;}
+    font-family:var(--font-serif);font-weight:400;
+    font-size:clamp(16px,2.6vw,19px);color:var(--stone);margin:0;
+    line-height:1.4;
   }
 
   /* ================= EDITORIAL SECTION ================= */
@@ -326,23 +304,22 @@
   }
   .contact-screen h2{
     font-family:var(--font-serif);font-weight:600;font-style:italic;
-    font-size:clamp(48px,10vw,96px);
-    margin:0 0 8px;color:var(--pine-deep);
+    font-size:clamp(42px,8vw,72px);
+    margin:0 0 6px;color:var(--pine-deep);
   }
   .contact-screen .role{
-    font-family:var(--font-mono);font-size:12px;letter-spacing:0.12em;
-    text-transform:uppercase;color:var(--stone);margin:0 0 48px;
+    font-size:15px;font-style:italic;color:var(--stone);margin:0 0 40px;
   }
   .contact-screen .phone{
     font-family:var(--font-serif);font-weight:600;
-    font-size:clamp(28px,5vw,38px);
+    font-size:clamp(20px,3.6vw,26px);
     color:var(--pine-deep);text-decoration:none;display:inline-block;
   }
   .contact-screen .phone:hover{color:var(--gold);}
   .contact-screen .tg{
-    display:block;margin-top:14px;
-    font-family:var(--font-mono);font-size:13px;letter-spacing:0.05em;
-    color:var(--gold);text-decoration:none;
+    display:block;margin-top:12px;
+    font-family:var(--font-mono);font-size:12px;letter-spacing:0.06em;
+    color:var(--stone);text-decoration:none;
   }
   .contact-screen .tg:hover{color:var(--pine-deep);}
 
@@ -443,10 +420,10 @@
   <div class="hero-main">
     <p class="hero-num">25</p>
     <p class="hero-month">июля, суббота</p>
-    <p style="font-size:clamp(14px,2.4vw,17px);line-height:1.75;color:var(--mist);max-width:400px;margin:72px 0 0;text-align:center;opacity:0.75;">Дорогие гости нашей свадьбы! Мы собрали здесь всё необходимое, чтобы вам было удобно.</p>
   </div>
 
   <div class="hero-bottom wrap">
+    <p style="font-size:clamp(13px,2.2vw,15px);line-height:1.75;color:var(--mist);max-width:380px;margin:0 auto;text-align:center;opacity:0.65;">Дорогие гости нашей свадьбы! Мы собрали здесь всё необходимое, чтобы вам было удобно.</p>
   </div>
 </section>
 
@@ -485,36 +462,23 @@
 
         <!-- 1. Автобус -->
         <div class="tl-stop">
-          <span class="tl-dot"></span>
           <p class="tl-time">08:30</p>
-          <p class="tl-title">Автобус от м.Автово</p>
+          <p class="tl-title">Автобус от м.&nbsp;Автово</p>
         </div>
-
-        <!-- 2. Монрепо -->
         <div class="tl-stop">
-          <span class="tl-dot"></span>
-          <p class="tl-time">≈ 11:00</p>
+          <p class="tl-time">≈&nbsp;11:00</p>
           <p class="tl-title">Парк Монрепо</p>
         </div>
-
-        <!-- 3. Церемония -->
         <div class="tl-stop">
-          <span class="tl-dot"></span>
           <p class="tl-time">12:00</p>
-          <p class="tl-title">Церемония регистрации</p>
+          <p class="tl-title">Церемония</p>
         </div>
-
-        <!-- 4. Ресторан -->
         <div class="tl-stop">
-          <span class="tl-dot"></span>
           <p class="tl-time">15:30</p>
-          <p class="tl-title">Ресторан «Птички и&nbsp;ягоды»</p>
+          <p class="tl-title">«Птички и&nbsp;ягоды»</p>
         </div>
-
-        <!-- 5. Конец -->
         <div class="tl-stop">
-          <span class="tl-dot"></span>
-          <p class="tl-time">≈ 21:00</p>
+          <p class="tl-time">≈&nbsp;21:00</p>
           <p class="tl-title">Конец торжества</p>
         </div>
 
@@ -690,9 +654,7 @@
 <!-- ============ СКАЧАТЬ PDF ============ -->
 <section class="poster" style="text-align:center;">
   <div class="wrap">
-    <p class="eyebrow" style="color:var(--gold);margin:0 0 20px;">Памятка</p>
-    <h3 style="font-size:clamp(28px,5vw,48px);margin:0 0 20px;">Чек-лист<br>на телефон</h3>
-    <p style="font-size:16px;line-height:1.8;color:#4A473D;max-width:380px;margin:0 auto 32px;">Короткая памятка с временем, адресами и&nbsp;контактами&nbsp;— сохраните, чтобы свериться в&nbsp;дороге.</p>
+    <p style="font-size:16px;line-height:1.8;color:#4A473D;max-width:380px;margin:0 auto 32px;">Памятка с временем, адресами и&nbsp;контактами&nbsp;— сохраните, чтобы свериться в&nbsp;дороге.</p>
     <a href="./checklist.pdf" download="Памятка_25_июля.pdf" style="font-family:var(--font-mono);font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);text-decoration:none;">Скачать PDF ↗</a>
   </div>
 </section>
