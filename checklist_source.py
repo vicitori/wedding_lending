@@ -14,28 +14,28 @@ import os
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 _FONT_DIR = os.path.join(_SCRIPT_DIR, "fonts")
 
-pdfmetrics.registerFont(TTFont("Serif",       f"{_FONT_DIR}/cormorant-garamond-v21-cyrillic_latin-regular.ttf"))
-pdfmetrics.registerFont(TTFont("Serif-Bold",   f"{_FONT_DIR}/cormorant-garamond-v21-cyrillic_latin-700.ttf"))
-pdfmetrics.registerFont(TTFont("Serif-Italic", f"{_FONT_DIR}/cormorant-garamond-v21-cyrillic_latin-italic.ttf"))
-pdfmetrics.registerFont(TTFont("Serif-Light",  f"{_FONT_DIR}/cormorant-garamond-v21-cyrillic_latin-300.ttf"))
-pdfmetrics.registerFont(TTFont("Serif-LightIt",f"{_FONT_DIR}/cormorant-garamond-v21-cyrillic_latin-300italic.ttf"))
-pdfmetrics.registerFont(TTFont("Sans",         f"{_FONT_DIR}/raleway-v37-cyrillic_latin-300.ttf"))
-pdfmetrics.registerFont(TTFont("Sans-Medium",  f"{_FONT_DIR}/raleway-v37-cyrillic_latin-regular.ttf"))
-pdfmetrics.registerFont(TTFont("Sans-Semi",    f"{_FONT_DIR}/raleway-v37-cyrillic_latin-600.ttf"))
+pdfmetrics.registerFont(TTFont("Serif",        f"{_FONT_DIR}/cormorant-garamond-v21-cyrillic_latin-regular.ttf"))
+pdfmetrics.registerFont(TTFont("Serif-Bold",    f"{_FONT_DIR}/cormorant-garamond-v21-cyrillic_latin-700.ttf"))
+pdfmetrics.registerFont(TTFont("Serif-Italic",  f"{_FONT_DIR}/cormorant-garamond-v21-cyrillic_latin-italic.ttf"))
+pdfmetrics.registerFont(TTFont("Serif-Light",   f"{_FONT_DIR}/cormorant-garamond-v21-cyrillic_latin-300.ttf"))
+pdfmetrics.registerFont(TTFont("Serif-LightIt", f"{_FONT_DIR}/cormorant-garamond-v21-cyrillic_latin-300italic.ttf"))
+pdfmetrics.registerFont(TTFont("Sans",          f"{_FONT_DIR}/raleway-v37-cyrillic_latin-300.ttf"))
+pdfmetrics.registerFont(TTFont("Sans-Medium",   f"{_FONT_DIR}/raleway-v37-cyrillic_latin-regular.ttf"))
+pdfmetrics.registerFont(TTFont("Sans-Semi",     f"{_FONT_DIR}/raleway-v37-cyrillic_latin-600.ttf"))
 
 # ---------------------------------------------------------
-# Palette — softer, airier tones
+# Palette
 # ---------------------------------------------------------
-SAGE      = (42 / 255, 58 / 255, 42 / 255)       # deep sage — header/footer, anchor
-PAPER     = (252 / 255, 250 / 255, 245 / 255)     # warm white background
-CREAM     = (245 / 255, 241 / 255, 233 / 255)     # light text on dark bg
-CHAMPAGNE = (175 / 255, 145 / 255, 90 / 255)      # rich warm gold — accents, dots
+SAGE            = (42 / 255, 58 / 255, 42 / 255)
+PAPER           = (252 / 255, 250 / 255, 245 / 255)
+CREAM           = (245 / 255, 241 / 255, 233 / 255)
+CHAMPAGNE       = (175 / 255, 145 / 255, 90 / 255)
 CHAMPAGNE_LIGHT = (205 / 255, 183 / 255, 142 / 255)
-INK       = (48 / 255, 46 / 255, 42 / 255)        # deep warm gray — body text
-INK_LIGHT = (90 / 255, 86 / 255, 78 / 255)        # descriptions, secondary text
-STONE     = (140 / 255, 133 / 255, 120 / 255)     # muted captions
-LINE      = (225 / 255, 218 / 255, 202 / 255)     # subtle dividers
-MIST      = (175 / 255, 190 / 255, 185 / 255)     # telegram, muted accents
+INK             = (48 / 255, 46 / 255, 42 / 255)
+INK_LIGHT       = (85 / 255, 82 / 255, 75 / 255)
+STONE           = (140 / 255, 133 / 255, 120 / 255)
+LINE            = (225 / 255, 218 / 255, 202 / 255)
+MIST            = (175 / 255, 190 / 255, 185 / 255)
 
 # ---------------------------------------------------------
 # Page geometry
@@ -65,7 +65,7 @@ c = canvas.Canvas("checklist.pdf", pagesize=A5)
 # ---------------------------------------------------------
 # Reusable primitives
 # ---------------------------------------------------------
-def draw_wrapped(x, y, text, width, font="Serif", size=10, leading=4.6 * mm, color=INK):
+def draw_wrapped(x, y, text, width, font="Serif", size=11, leading=4.8 * mm, color=INK):
     c.setFillColorRGB(*color)
     c.setFont(font, size)
     words = text.split()
@@ -84,7 +84,7 @@ def draw_wrapped(x, y, text, width, font="Serif", size=10, leading=4.6 * mm, col
     return yy
 
 
-def checkbox(x, text_baseline_y, text_size=10.5):
+def checkbox(x, text_baseline_y, text_size=11):
     cap_height = text_size * 0.7
     box_bottom = text_baseline_y + cap_height / 2 - BOX_SIZE / 2
     c.setStrokeColorRGB(*CHAMPAGNE)
@@ -102,18 +102,15 @@ def divider(y, x0=MARGIN, x1=None, color=LINE, width=0.4):
 
 
 def section(title, y, x=MARGIN, color=CHAMPAGNE):
-    """Section heading — light sans-serif, letter-spaced uppercase."""
     c.setFillColorRGB(*color)
-    c.setFont("Sans-Semi", 7.5)
-    # Manual letter-spacing for uppercase
+    c.setFont("Sans-Semi", 8)
     spaced = "  ".join(title.upper())
     c.drawString(x, y, spaced)
 
 
 def section_centered(title, y, center_x, color=CHAMPAGNE):
-    """Section heading centered at center_x."""
     c.setFillColorRGB(*color)
-    c.setFont("Sans-Semi", 7.5)
+    c.setFont("Sans-Semi", 8)
     spaced = "  ".join(title.upper())
     c.drawCentredString(center_x, y, spaced)
 
@@ -138,20 +135,21 @@ def draw_qr_svg(x, y, size):
 # ===========================================================
 draw_background()
 
-# ---------- header ----------
-HEADER_H = 26 * mm
-c.setFillColorRGB(*SAGE)
-c.rect(0, H - HEADER_H, W, HEADER_H, fill=1, stroke=0)
+# ---------- header (open, no color block) ----------
+y = H - MARGIN
 
-c.setFillColorRGB(*CHAMPAGNE_LIGHT)
-c.setFont("Sans", 7)
-c.drawString(MARGIN, H - 9 * mm, "25 ИЮЛЯ  ·  ВЫБОРГ  ·  СВАДЕБНЫЙ ЧЕК-ЛИСТ")
+c.setFillColorRGB(*STONE)
+c.setFont("Sans-Medium", 8)
+c.drawCentredString(W / 2, y, "25 июля  ·  Выборг")
+y -= 10 * mm
 
-c.setFillColorRGB(*CREAM)
-c.setFont("Serif-Bold", 22)
-c.drawString(MARGIN, H - 20 * mm, "Путеводитель гостя")
+c.setFillColorRGB(*INK)
+c.setFont("Serif-Bold", 26)
+c.drawCentredString(W / 2, y, "Путеводитель гостя")
+y -= 6 * mm
 
-y = H - HEADER_H - 7 * mm
+divider(y, color=CHAMPAGNE, width=0.5)
+y -= 8 * mm
 
 # ---------- todo checklist (full width) ----------
 section("Перед выходом", y)
@@ -163,9 +161,9 @@ todo = [
     "Зарядить телефон",
 ]
 for item in todo:
-    text_x = checkbox(MARGIN, y, text_size=10.5)
+    text_x = checkbox(MARGIN, y, text_size=11)
     c.setFillColorRGB(*INK)
-    c.setFont("Serif", 10.5)
+    c.setFont("Serif", 11)
     c.drawString(text_x, y, item)
     y -= 7 * mm
 
@@ -191,19 +189,19 @@ def timeline_item(y, time, title, text, is_last=False):
     c.setFillColorRGB(*CHAMPAGNE)
     c.circle(line_x, y, 1.3 * mm, stroke=0, fill=1)
 
-    # Time — light sans
+    # Time
     c.setFillColorRGB(*CHAMPAGNE)
-    c.setFont("Sans-Medium", 8)
+    c.setFont("Sans-Medium", 8.5)
     c.drawString(text_x, y + 0.3 * mm, time)
 
-    # Title — serif bold, dark anchor
+    # Title
     c.setFillColorRGB(*INK)
-    c.setFont("Serif-Bold", 11)
-    c.drawString(text_x, y - 4.2 * mm, title)
+    c.setFont("Serif-Bold", 12)
+    c.drawString(text_x, y - 4.5 * mm, title)
 
-    # Description — serif light, softer
-    text_bottom = draw_wrapped(text_x, y - 8.5 * mm, text, text_w,
-                               font="Serif-Light", size=9, leading=3.6 * mm,
+    # Description — regular weight, readable
+    text_bottom = draw_wrapped(text_x, y - 9 * mm, text, text_w,
+                               font="Serif", size=10, leading=3.8 * mm,
                                color=INK_LIGHT)
     next_y = text_bottom - TIMELINE_PADDING
 
@@ -246,14 +244,14 @@ c.line(col_divider_x, col_top_y + 3 * mm,
 right_center_x = (col_divider_x + W - MARGIN) / 2
 
 section_centered("Фотографии", col_top_y, right_center_x)
-y_right = col_top_y - 6 * mm
+y_right = col_top_y - 7 * mm
 
-c.setFillColorRGB(*INK)
-c.setFont("Serif-LightIt", 9)
+c.setFillColorRGB(*INK_LIGHT)
+c.setFont("Serif-Italic", 10)
 c.drawCentredString(right_center_x, y_right, "Присылайте фотографии")
-y_right -= 4 * mm
+y_right -= 4.5 * mm
 c.drawCentredString(right_center_x, y_right, "с торжества")
-y_right -= 6 * mm
+y_right -= 7 * mm
 
 QR_SIZE = 26 * mm
 qr_x = right_center_x - QR_SIZE / 2
@@ -268,20 +266,20 @@ c.rect(qr_x - QR_FRAME_PAD, qr_y - QR_FRAME_PAD,
 
 draw_qr_svg(qr_x, qr_y, QR_SIZE)
 
-# ---------- footer / contacts (centered, clean) ----------
+# ---------- footer ----------
 c.setFillColorRGB(*SAGE)
 c.rect(0, 0, W, FOOTER_H, fill=1, stroke=0)
 
 footer_cx = W / 2
 
 c.setFillColorRGB(*CHAMPAGNE_LIGHT)
-c.setFont("Sans", 6.5)
+c.setFont("Sans", 7.5)
 c.drawCentredString(footer_cx, FOOTER_H - 5.5 * mm, "ЕСЛИ  ПОТЕРЯЕТЕСЬ")
 
 c.setFillColorRGB(*CREAM)
-c.setFont("Serif-Light", 10)
-c.drawCentredString(footer_cx, FOOTER_H / 2 - 1.5 * mm,
-                    "Кирилл  ·  +7 910 966 6402  ·  @tepa46")
+c.setFont("Serif", 11)
+c.drawCentredString(footer_cx, FOOTER_H / 2 - 2 * mm,
+                    "Кирилл  ·  +7 910 966 6402  ·  телеграм @tepa46")
 
 # ---------------------------------------------------------
 c.showPage()

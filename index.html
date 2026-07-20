@@ -363,12 +363,20 @@
 .qr-single{display:flex;flex-direction:column;align-items:center;gap:28px}
 .qr-img-lg{width:260px;max-width:100%}
 .qr-link{display:inline-block;padding:14px 26px;border:1px solid var(--pine);text-decoration:none}
-.qr-legend{max-width:480px;margin:0 auto;}
-.qr-legend-item{display:flex;gap:16px;align-items:baseline;padding:14px 0;border-bottom:1px solid var(--line);}
-.qr-legend-item:first-child{border-top:1px solid var(--line);}
-.qr-legend-dot{width:8px;height:8px;border-radius:50%;background:var(--gold);flex:none;position:relative;top:1px;}
-.qr-legend-title{font-family:var(--font-serif);font-weight:600;font-size:16px;color:var(--pine-deep);margin:0;}
-.qr-legend-desc{font-size:14px;color:var(--stone);margin:4px 0 0;line-height:1.6;}
+.qr-hints{
+  display:flex;gap:40px;justify-content:center;flex-wrap:wrap;
+  max-width:520px;margin:0 auto;
+}
+.qr-hint{
+  flex:1 1 200px;text-align:center;
+}
+.qr-hint-title{
+  font-family:var(--font-serif);font-weight:600;
+  font-size:17px;color:var(--pine-deep);margin:0 0 6px;
+}
+.qr-hint-desc{
+  font-size:14px;line-height:1.65;color:var(--stone);margin:0;
+}
 
 @media(prefers-reduced-motion:no-preference){
     .reveal{opacity:0;transform:translateY(18px);transition:opacity 0.9s ease, transform 0.9s ease;}
@@ -638,20 +646,14 @@
            src="qr.svg">
       <a class="qr-link" href="https://disk.yandex.ru/d/k483YWgfwVIvRw">Ссылка на альбом</a>
 
-      <div class="qr-legend">
-        <div class="qr-legend-item">
-          <span class="qr-legend-dot"></span>
-          <div>
-            <p class="qr-legend-title">Скиньте свои кадры</p>
-            <p class="qr-legend-desc">Загружайте фото с телефона прямо в общий альбом.</p>
-          </div>
+      <div class="qr-hints">
+        <div class="qr-hint">
+          <p class="qr-hint-title">Ваши кадры</p>
+          <p class="qr-hint-desc">Загружайте фото с&nbsp;телефона прямо в&nbsp;общий альбом</p>
         </div>
-        <div class="qr-legend-item">
-          <span class="qr-legend-dot"></span>
-          <div>
-            <p class="qr-legend-title">Профессиональные снимки</p>
-            <p class="qr-legend-desc">Фото от нашего фотографа появятся здесь чуть позже — ищите себя!</p>
-          </div>
+        <div class="qr-hint">
+          <p class="qr-hint-title">От фотографа</p>
+          <p class="qr-hint-desc">Снимки появятся чуть позже&nbsp;— ищите себя!</p>
         </div>
       </div>
     </div>
