@@ -1,9 +1,24 @@
-<!DOCTYPE html>
+
+                        <!DOCTYPE html>
+                        <html lang="en">
+                        <head>
+                            <meta charset="UTF-8">
+                            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+							<style>
+								body {
+									background-color: white; /* Ensure the iframe has a white background */
+								}
+
+								
+							</style>
+                        </head>
+                        <body>
+                            <!DOCTYPE html>
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>25 июля — путеводитель гостя</title>
+<title>25 июля — путеводитель гhero-блостя</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -37,33 +52,95 @@
   }
   a{color:inherit;}
   ::selection{background:var(--gold-soft);color:var(--pine-deep);}
-
   .wrap{max-width:640px;margin:0 auto;padding:0 32px;}
   .wrap-wide{max-width:1200px;margin:0 auto;padding:0 32px;}
 
-  /* ================= EDITORIAL TWO-COLUMN (tablet/desktop) ================= */
-  .story-split{display:block;}
-  .story-split .story-aside{margin-top:52px;}
-  @media(min-width:900px){
-    .story-split{display:grid;grid-template-columns:1.15fr 0.85fr;gap:70px;align-items:start;}
-    .story-split .story-aside{margin-top:34px;}
+  /* ================= HERO (self-contained) ================= */
+  .hero{
+    background:#182219;
+    color:#F3EEE3;
+    position:relative;
+    overflow:hidden;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    padding:56px 0 40px;
+    margin:0;
   }
-  .aside-quote{
-    border-left:1px solid var(--gold-soft);
-    padding-left:24px;
+  .hero *{margin:0;padding:0;}
+  .hero-contours{
+    position:absolute;
+    inset:0;
+    z-index:1;
+    opacity:0.5;
+    pointer-events:none;
+  }
+  .hero-topline{
+    position:relative;
+    z-index:2;
+    padding:0 32px 0 96px;
+  }
+  .hero-topline .eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    text-transform:uppercase;
+    letter-spacing:0.18em;
+    font-size:11px;
+    font-weight:500;
+    color:#C7A876;
+  }
+  .hero-main{
+    position:relative;
+    z-index:2;
+    padding:0 32px 0 96px;
+  }
+  .hero-num{
+    font-family:'Lora',serif;
+    font-weight:600;
+    font-size:clamp(160px, 32vw, 340px);
+    line-height:0.82;
+    color:#F3EEE3;
+    letter-spacing:-0.02em;
+  }
+  .hero-month{
+    font-family:'Lora',serif;
     font-style:italic;
-    font-size:19px;
-    line-height:1.65;
-    color:#DCD6C0;
-    max-width:340px;
+    font-weight:500;
+    font-size:clamp(30px, 5.5vw, 52px);
+    margin-top:6px;
+    color:#C7A876;
   }
-  .story.on-pine .aside-quote{color:#DCD6C0;}
-  .story:not(.on-pine) .aside-quote{color:#4A473D;border-left-color:var(--gold);}
+  .hero-tagline{
+    font-family:'Lora',serif;
+    font-weight:400;
+    font-size:clamp(24px, 4.4vw, 38px);
+    line-height:1.28;
+    max-width:520px;
+    margin-top:38px;
+    color:#E6E0CE;
+  }
+  .hero-bottom{
+    position:relative;
+    z-index:2;
+    padding:0 32px 0 96px;
+    margin-top:40px;
+  }
+  .hero-line{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    letter-spacing:0.04em;
+    color:#B7C4C4;
+  }
+  @media(max-width:1000px){
+    .hero-num{font-size:clamp(120px, 24vw, 220px);}
+  }
+  @media(max-width:720px){
+    .hero-topline,
+    .hero-main,
+    .hero-bottom{padding-left:32px;padding-right:32px;}
+  }
 
-  /* ================= DECORATIVE ELEMENTS (wide screens only) ================= */
-  .deco{position:absolute;pointer-events:none;opacity:0.55;z-index:0;}
-  @media(max-width:1000px){ .deco{display:none;} }
-
+  /* ================= SHARED ================= */
   .eyebrow{
     font-family:var(--font-mono);
     text-transform:uppercase;
@@ -72,56 +149,7 @@
     font-weight:500;
   }
 
-  /* paper grain overlay */
-  .grain{position:fixed;inset:0;pointer-events:none;z-index:999;opacity:0.5;mix-blend-mode:multiply;}
-
-  /* ================= HERO ================= */
-  .hero{
-    background:var(--pine-deep);
-    color:var(--parchment);
-    position:relative;
-    overflow:hidden;
-    min-height:100vh;
-    display:flex;
-    flex-direction:column;
-    justify-content:space-between;
-    padding:56px 0 40px;
-  }
-  .hero-topline{position:relative;z-index:2;display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:18px 28px;}
-  .hero-topline .eyebrow{color:var(--gold-soft);white-space:nowrap;}
-  .hero-topline .meta{text-align:right;color:var(--mist);line-height:1.9;white-space:nowrap;}
-
-  .hero-contours{position:absolute;inset:0;z-index:1;opacity:0.5;}
-
-  .hero-main{position:relative;z-index:2;padding:0 32px;}
-  .hero-num{
-    font-weight:600;
-    font-size:clamp(160px,32vw,340px);
-    line-height:0.82;
-    margin:0;
-    color:var(--parchment);
-    letter-spacing:-0.02em;
-  }
-  .hero-month{
-    font-style:italic;
-    font-weight:500;
-    font-size:clamp(30px,5.5vw,52px);
-    margin:2px 0 0;
-    color:var(--gold-soft);
-  }
-  .hero-tagline{
-    font-weight:400;
-    font-size:clamp(24px,4.4vw,38px);
-    line-height:1.28;
-    max-width:520px;
-    margin:38px 0 0;
-    color:#E6E0CE;
-  }
-  .hero-bottom{position:relative;z-index:2;padding:0 32px;display:flex;justify-content:space-between;align-items:flex-end;margin-top:40px;}
-  .hero-scroll{writing-mode:vertical-rl;font-family:var(--font-mono);font-size:10.5px;letter-spacing:0.16em;color:var(--mist);text-transform:uppercase;}
-  .hero-line{color:var(--mist);font-family:var(--font-mono);font-size:12px;letter-spacing:0.04em;}
-
-  /* ================= QUIET SCREEN ================= */
+  /* ================= QUIET ================= */
   .quiet{background:var(--pine-deep);color:var(--parchment);padding:8vh 0 16vh;text-align:center;}
   .quiet-mark{margin:0 auto 48px;display:block;opacity:0.7;}
   .quiet p{
@@ -144,7 +172,7 @@
     text-transform:uppercase;
   }
 
-  /* ================= ROUTE (journal spine) ================= */
+  /* ================= ROUTE ================= */
   .route-section{background:var(--paper);padding:150px 0 130px;position:relative;}
   .route-heading{margin:0 0 20px;}
   .route-heading .eyebrow{color:var(--gold);}
@@ -157,16 +185,12 @@
     color:var(--pine-deep);
   }
   .route-intro{font-size:16px;line-height:1.8;color:#4A473D;max-width:420px;margin:22px 0 0;}
-
   .route-body{position:relative;margin-top:90px;}
   .route-svg{display:block;width:100%;height:auto;}
-  .route-stop-label{position:absolute;transform:translateY(-50%);}
   .route-time{font-family:var(--font-mono);font-size:13px;letter-spacing:0.05em;color:var(--gold);margin:0 0 3px;}
   .route-place{font-family:var(--font-serif);font-weight:600;font-size:21px;color:var(--pine-deep);margin:0;}
-  .route-note{position:absolute;transform:translateY(-50%);font-family:var(--font-mono);font-size:11.5px;letter-spacing:0.02em;color:var(--stone);max-width:150px;line-height:1.55;}
-  .route-note::before{content:"— ";color:var(--gold);}
 
-  /* ================= EDITORIAL SECTION ================= */
+  /* ================= STORY ================= */
   .story{padding:130px 0;}
   .story.on-pine{background:var(--pine);color:var(--parchment);}
   .story-head{display:flex;align-items:baseline;gap:16px;margin-bottom:44px;}
@@ -174,7 +198,6 @@
   .story-head h2{font-family:var(--font-serif);font-weight:600;font-size:clamp(28px,4.6vw,38px);margin:0;color:var(--pine-deep);}
   .story.on-pine .story-head h2{color:var(--parchment);}
   .story.on-pine .story-head .idx{color:var(--gold-soft);}
-
   .dropcap p{font-size:17.5px;line-height:1.85;color:#3E3B31;margin:0 0 22px;max-width:520px;}
   .story.on-pine .dropcap p{color:#DCD6C0;}
   .dropcap p:first-of-type::first-letter{
@@ -191,7 +214,6 @@
   .caption-line{font-family:var(--font-mono);font-size:12px;letter-spacing:0.05em;color:var(--stone);margin-top:26px;}
   .story.on-pine .caption-line{color:var(--mist);}
 
-  /* ================= MINI BLOCKS (break up dense info clusters) ================= */
   .mini-block{margin-top:32px;padding-top:26px;border-top:1px solid rgba(222,210,184,0.25);}
   .story.on-pine .mini-block{border-top-color:rgba(247,242,221,0.16);}
   .mini-label{
@@ -206,7 +228,6 @@
   .mini-block p{font-size:16.5px;line-height:1.8;color:#DCD6C0;max-width:500px;margin:0;}
   .story:not(.on-pine) .mini-block p{color:#3E3B31;}
 
-  /* big number moment */
   .big-num-block{margin:80px 0 0;}
   .big-num{font-family:var(--font-serif);font-weight:600;font-size:clamp(120px,20vw,220px);line-height:0.85;margin:0;color:var(--pine-deep);letter-spacing:-0.01em;}
   .story.on-pine .big-num{color:var(--parchment);}
@@ -215,7 +236,25 @@
   .big-num-sub strong{color:var(--pine-deep);font-weight:600;}
   .story.on-pine .big-num-sub strong{color:var(--gold-soft);}
 
-  /* ================= POSTER INSERT ================= */
+  .story-split{display:block;}
+  .story-split .story-aside{margin-top:52px;}
+  @media(min-width:900px){
+    .story-split{display:grid;grid-template-columns:1.15fr 0.85fr;gap:70px;align-items:start;}
+    .story-split .story-aside{margin-top:34px;}
+  }
+  .aside-quote{
+    border-left:1px solid var(--gold-soft);
+    padding-left:24px;
+    font-style:italic;
+    font-size:19px;
+    line-height:1.65;
+    color:#DCD6C0;
+    max-width:340px;
+  }
+  .story.on-pine .aside-quote{color:#DCD6C0;}
+  .story:not(.on-pine) .aside-quote{color:#4A473D;border-left-color:var(--gold);}
+
+  /* ================= POSTER ================= */
   .poster{padding:110px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
   .poster h3{
     font-family:var(--font-serif);
@@ -231,10 +270,6 @@
   .poster .eyebrow{color:var(--gold);margin-bottom:22px;display:block;}
 
   /* ================= DRESS CODE ================= */
-  .palette{display:flex;gap:0;margin:56px 0 0;flex-wrap:wrap;border-top:1px solid var(--line);border-left:1px solid var(--line);}
-  .swatch{flex:1 1 20%;min-width:110px;aspect-ratio:1;position:relative;border-right:1px solid var(--line);border-bottom:1px solid var(--line);display:flex;align-items:flex-end;padding:14px;}
-  .swatch span{font-family:var(--font-mono);font-size:11px;letter-spacing:0.04em;color:rgba(0,0,0,0.55);}
-
   .qa{margin-top:70px;max-width:440px;}
   .qa-row{display:flex;justify-content:space-between;align-items:baseline;padding:18px 0;border-bottom:1px solid var(--line);}
   .qa-row:first-child{border-top:1px solid var(--line);}
@@ -271,6 +306,97 @@
   .contact-screen .tg{display:block;margin-top:14px;font-family:var(--font-mono);font-size:13px;letter-spacing:0.05em;color:var(--mist);text-decoration:none;}
   .contact-screen .tg:hover{color:var(--parchment);}
 
+  /* ================= PHOTO / QR ================= */
+  .photos{
+    background:var(--parchment);
+    padding:130px 0;
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+  }
+  .photos .head{text-align:center;max-width:560px;margin:0 auto 70px;}
+  .photos .eyebrow{color:var(--gold);}
+  .photos h2{
+    font-family:var(--font-serif);
+    font-style:italic;
+    font-weight:500;
+    font-size:clamp(30px,5vw,44px);
+    margin:14px 0 22px;
+    color:var(--pine-deep);
+  }
+  .photos .lead{font-size:16.5px;line-height:1.75;color:#4A473D;margin:0;}
+
+  .qr-single{
+    max-width:480px;
+    margin:0 auto;
+    text-align:center;
+    background:var(--paper);
+    border:1px solid var(--line);
+    padding:52px 40px 44px;
+    position:relative;
+  }
+  .qr-single::before,
+  .qr-single::after{
+    content:"";position:absolute;
+    width:18px;height:18px;
+    border:1px solid var(--gold);
+  }
+  .qr-single::before{top:-1px;left:-1px;border-right:none;border-bottom:none;}
+  .qr-single::after{bottom:-1px;right:-1px;border-left:none;border-top:none;}
+
+  .qr-img-lg{
+    width:240px;height:240px;
+    display:block;margin:0 auto 18px;
+    background:#fff;
+    padding:14px;
+    border:1px solid var(--line);
+  }
+  .qr-link{
+    display:inline-block;
+    font-family:var(--font-mono);
+    font-size:11px;
+    letter-spacing:0.08em;
+    color:var(--gold);
+    text-decoration:none;
+    border-bottom:1px dotted var(--gold);
+    padding-bottom:2px;
+    word-break:break-all;
+  }
+
+  .qr-legend{
+    margin-top:38px;
+    padding-top:28px;
+    border-top:1px solid var(--line);
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:24px;
+    text-align:left;
+  }
+  .qr-legend-item{
+    display:flex;
+    gap:12px;
+    align-items:flex-start;
+  }
+  .qr-legend-dot{
+    flex:none;
+    width:8px;height:8px;
+    background:var(--gold);
+    border-radius:50%;
+    margin-top:7px;
+  }
+  .qr-legend-title{
+    font-family:var(--font-serif);
+    font-weight:600;
+    font-size:15px;
+    color:var(--pine-deep);
+    margin:0 0 4px;
+  }
+  .qr-legend-desc{
+    font-size:13.5px;
+    line-height:1.55;
+    color:#4A473D;
+    margin:0;
+  }
+
   /* ================= DOWNLOAD BAND ================= */
   .download-band{padding:64px 0;background:var(--parchment);border-bottom:1px solid var(--line);}
   .download-band .row{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;}
@@ -286,57 +412,33 @@
   .final p{font-size:14px;color:var(--mist);margin:0;}
   .final .fig{margin:56px auto 0;display:block;opacity:0.6;}
 
-  @media(max-width:720px){
-    .route-note{position:static;transform:none;max-width:none;margin:6px 0 0 0;}
-    .route-stop-label{position:static;transform:none;margin-bottom:26px;}
-    .route-svg{display:none;}
-    .route-list{display:block;}
-    .story-head{flex-wrap:wrap;}
-    .hero-topline{flex-direction:column;gap:22px;}
-    .hero-topline .meta{text-align:left;}
-    .swatch{flex:1 1 33%;}
-    .download-band .row{flex-direction:column;align-items:flex-start;}
-  }
-  @media(min-width:721px){ .route-list{display:none;} }
-
-  /* ============ ADAPTIVE LAYOUT: TABLET & DESKTOP ============ */
-  /* tablet: give the narrow editorial column more room instead of huge side gutters */
-  @media(max-width:1200px){
-    .wrap{max-width:760px;}
-  }
-  /* tablet: hero numeral was overflowing/too dominant between 720–1000px */
-  @media(max-width:1000px){
-    .hero-num{font-size:clamp(120px,24vw,220px);}
-  }
-  /* very wide monitors: hero felt like an empty void at full 100vh */
-  @media(min-width:1400px){
-    .hero{min-height:850px;}
-  }
-  /* very wide monitors: give the route diagram and wide sections real room to breathe */
-  @media(min-width:1400px){
-    .wrap-wide{max-width:1240px;}
-    .route-body{margin-top:110px;}
-  }
-
+  /* ================= ROUTE LIST (mobile) ================= */
   .route-list{margin-top:20px;}
   .route-list .rl-item{display:flex;gap:22px;padding:20px 0;border-top:1px solid var(--line);}
   .route-list .rl-item:last-child{border-bottom:1px solid var(--line);}
-  .route-list .rl-icon{flex:none;width:30px;height:30px;color:var(--gold);}
 
-  @media(prefers-reduced-motion:no-preference){
-    .reveal{opacity:0;transform:translateY(18px);transition:opacity 0.9s ease, transform 0.9s ease;}
-    .reveal.in{opacity:1;transform:translateY(0);}
+  /* ================= RESPONSIVE ================= */
+  @media(max-width:720px){
+    .route-svg{display:none;}
+    .route-list{display:block;}
+    .story-head{flex-wrap:wrap;}
+    .download-band .row{flex-direction:column;align-items:flex-start;}
+  }
+  @media(min-width:721px){ .route-list{display:none;} }
+  @media(max-width:600px){
+    .qr-legend{grid-template-columns:1fr;gap:18px;}
+  }
+  @media(max-width:1200px){ .wrap{max-width:760px;} }
+  @media(min-width:1400px){
+    px;}
+    .wrap-wide{max-width:1240px;}
+    .route-body{margin-top:110px;}
   }
 </style>
 </head>
 <body>
 
-<svg class="grain" xmlns="http://www.w3.org/2000/svg">
-  <filter id="noiseFilter"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch"/><feColorMatrix type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.02 0"/></filter>
-  <rect width="100%" height="100%" filter="url(#noiseFilter)"/>
-</svg>
-
-<!-- ============ HERO ============ -->
+<!-- .hero{min-height:850============ HERO ============ -->
 <section class="hero">
   <svg class="hero-contours" viewBox="0 0 800 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
     <path d="M-40 120 Q 200 60 420 130 T 860 100" stroke="#33452F" stroke-width="1" fill="none"/>
@@ -345,13 +447,8 @@
     <path d="M-40 800 Q 280 860 520 810 T 860 830" stroke="#2C3D28" stroke-width="1" fill="none"/>
   </svg>
 
-  <div class="hero-topline wrap">
-    <p class="eyebrow">Свадебный&nbsp;путеводитель</p>
-    <div class="meta">
-      <span class="eyebrow" style="color:var(--mist);">Монрепо</span><br>
-      <span class="eyebrow" style="color:var(--mist);">Выборг</span><br>
-      <span class="eyebrow" style="color:var(--mist);">2026</span>
-    </div>
+  <div class="hero-topline">
+    <p class="eyebrow">Свадебный путеводитель · Монрепо, Выборг</p>
   </div>
 
   <div class="hero-main">
@@ -360,140 +457,78 @@
     <p class="hero-tagline">Один день,<br>который мы будем<br>вспоминать всю жизнь.</p>
   </div>
 
-  <div class="hero-bottom wrap">
+  <div class="hero-bottom">
     <p class="hero-line">Дорогие гости — собрали здесь всё, что нужно знать</p>
   </div>
 </section>
 
-<!-- ============ QUIET SCREEN ============ -->
+<!-- ============ QUIET ============ -->
 <section class="quiet">
   <div class="wrap">
     <svg class="quiet-mark" width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
       <circle cx="17" cy="17" r="13" stroke="#C7A876" stroke-width="1"/>
       <circle cx="17" cy="17" r="2" fill="#C7A876"/>
     </svg>
-    <p>Приехать вовремя — самая&nbsp;сложная задача, которая вас ждёт.<br>Дальше будет только приятное.<span class="attr">Из напутствия молодожёнов</span></p>
+    <p>Приехать вовремя — самая&nbsp;сложная задача, которая вас ждёт.<br>Дальше будет только приятное.<span class="attr">Из напутствия жениха и невесты</span></p>
   </div>
 </section>
 
-<!-- ============ ROUTE / JOURNAL SPINE ============ -->
-<section class="route-section" style="position:relative;">
-  <svg class="deco" width="180" height="220" viewBox="0 0 180 220" style="right:24px;top:60px;" xmlns="http://www.w3.org/2000/svg">
-    <path d="M90 220V70" stroke="#DED2B8" stroke-width="1"/>
-    <path d="M90 150C60 150 42 132 42 95" stroke="#DED2B8" stroke-width="0.8" fill="none"/>
-    <path d="M90 110C120 110 138 92 138 55" stroke="#DED2B8" stroke-width="0.8" fill="none"/>
-    <path d="M90 70C70 70 58 58 58 35" stroke="#DED2B8" stroke-width="0.8" fill="none"/>
-    <circle cx="42" cy="95" r="2.6" fill="#C7A876"/>
-    <circle cx="138" cy="55" r="2.6" fill="#C7A876"/>
-    <circle cx="58" cy="35" r="2.6" fill="#C7A876"/>
-  </svg>
+<!-- ============ ROUTE ============ -->
+<section class="route-section">
   <div class="wrap-wide">
     <div class="route-heading">
       <p class="eyebrow">Маршрут дня</p>
       <h2>Автово → Монрепо → «Птички и ягоды» → Автово</h2>
       <p class="route-intro">Один автобус, одна дорога, один долгий и красивый день. Вот как он устроен, час за часом.</p>
     </div>
-
     <div class="route-body">
       <svg class="route-svg" viewBox="0 0 900 1030" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Схема маршрута дня">
         <line x1="140" y1="30" x2="140" y2="1000" stroke="#C7A876" stroke-width="1" stroke-dasharray="1 7" stroke-linecap="round"/>
 
-        <g transform="translate(140,30)">
-          <circle r="22" fill="#FBF8F1" stroke="#A9824F" stroke-width="1.3"/>
-          <g transform="translate(-11,-11) scale(0.55)">
-            <rect x="9" y="10" width="22" height="16" rx="2.5" stroke="#A9824F" stroke-width="1.6" fill="none"/>
-            <line x1="9" y1="17" x2="31" y2="17" stroke="#A9824F" stroke-width="1.4"/>
-            <line x1="16" y1="10" x2="16" y2="17" stroke="#A9824F" stroke-width="1.4"/>
-            <line x1="24" y1="10" x2="24" y2="17" stroke="#A9824F" stroke-width="1.4"/>
-            <circle cx="14" cy="28" r="2.4" stroke="#A9824F" stroke-width="1.6" fill="none"/>
-            <circle cx="26" cy="28" r="2.4" stroke="#A9824F" stroke-width="1.6" fill="none"/>
-          </g>
-        </g>
+        <g transform="translate(140,30)"><circle r="22" fill="#FBF8F1" stroke="#A9824F" stroke-width="1.3"/></g>
         <text x="185" y="14" font-family="IBM Plex Mono" font-size="13" fill="#A9824F">08:30</text>
-        <text x="185" y="38" font-family="Lora" font-weight="600" font-size="23" fill="#182219">Автово</text>
-        <text x="185" y="61" font-family="IBM Plex Mono" font-size="11.5" fill="#8C8570">— вода в автобусе на весь день</text>
+        <text x="185" y="38" font-family="Lora" font-weight="600" font-size="23" fill="#182219">Автово, Стачек 88</text>
+        <text x="185" y="61" font-family="IBM Plex Mono" font-size="11.5" fill="#8C8570">— автобус Yutong, вода на весь день</text>
 
-        <g transform="translate(140,275)">
-          <circle r="22" fill="#FBF8F1" stroke="#A9824F" stroke-width="1.3"/>
-          <g transform="translate(-11,-11) scale(0.55)">
-            <path d="M11 28V16L20 9L29 16V28" stroke="#A9824F" stroke-width="1.7" fill="none"/>
-            <line x1="8" y1="28" x2="32" y2="28" stroke="#A9824F" stroke-width="1.7"/>
-            <line x1="20" y1="9" x2="20" y2="28" stroke="#A9824F" stroke-width="1.2"/>
-            <rect x="17" y="21" width="6" height="7" stroke="#A9824F" stroke-width="1.2" fill="none"/>
-          </g>
-        </g>
-        <text x="185" y="259" font-family="IBM Plex Mono" font-size="13" fill="#A9824F">≈ 11:00</text>
-        <text x="185" y="283" font-family="Lora" font-weight="600" font-size="23" fill="#182219">Монрепо, церемония</text>
-        <text x="185" y="306" font-family="IBM Plex Mono" font-size="11.5" fill="#8C8570">— остановка по дороге, ближе к Выборгу</text>
+        <g transform="translate(140,255)"><circle r="22" fill="#FBF8F1" stroke="#A9824F" stroke-width="1.3"/></g>
+        <text x="185" y="239" font-family="IBM Plex Mono" font-size="13" fill="#A9824F">≈ 10:30</text>
+        <text x="185" y="263" font-family="Lora" font-weight="600" font-size="23" fill="#182219">Парк Монрепо</text>
+        <text x="185" y="286" font-family="IBM Plex Mono" font-size="11.5" fill="#8C8570">— по дороге остановка размяться</text>
 
-        <g transform="translate(140,500)">
-          <circle r="22" fill="#FBF8F1" stroke="#A9824F" stroke-width="1.3"/>
-          <g transform="translate(-11,-11) scale(0.55)">
-            <rect x="8" y="14" width="24" height="17" rx="2" stroke="#A9824F" stroke-width="1.7" fill="none"/>
-            <path d="M15 14L17 10H23L25 14" stroke="#A9824F" stroke-width="1.7" stroke-linejoin="round" fill="none"/>
-            <circle cx="20" cy="23" r="5.5" stroke="#A9824F" stroke-width="1.7" fill="none"/>
-          </g>
-        </g>
-        <text x="185" y="484" font-family="IBM Plex Mono" font-size="13" fill="#A9824F">после церемонии</text>
-        <text x="185" y="508" font-family="Lora" font-weight="600" font-size="23" fill="#182219">Прогулка и фото</text>
-        <text x="185" y="531" font-family="IBM Plex Mono" font-size="11.5" fill="#8C8570">— фотограф работает только здесь</text>
+        <g transform="translate(140,430)"><circle r="22" fill="#FBF8F1" stroke="#A9824F" stroke-width="1.3"/></g>
+        <text x="185" y="414" font-family="IBM Plex Mono" font-size="13" fill="#A9824F">11:00</text>
+        <text x="185" y="438" font-family="Lora" font-weight="600" font-size="23" fill="#182219">Церемония во дворце</text>
+        <text x="185" y="461" font-family="IBM Plex Mono" font-size="11.5" fill="#8C8570">— на входе скажите «по групповому билету»</text>
 
-        <g transform="translate(140,725)">
-          <circle r="22" fill="#FBF8F1" stroke="#A9824F" stroke-width="1.3"/>
-          <g transform="translate(-11,-11) scale(0.55)">
-            <path d="M20 32V10" stroke="#A9824F" stroke-width="1.7" fill="none"/>
-            <path d="M20 22C15 22 12 19 12 14" stroke="#A9824F" stroke-width="1.4" fill="none"/>
-            <path d="M20 16C25 16 28 13 28 9" stroke="#A9824F" stroke-width="1.4" fill="none"/>
-            <circle cx="12" cy="14" r="2.4" fill="#A9824F"/>
-            <circle cx="28" cy="9" r="2.4" fill="#A9824F"/>
-            <circle cx="20" cy="10" r="2.4" fill="#A9824F"/>
-          </g>
-        </g>
-        <text x="185" y="709" font-family="IBM Plex Mono" font-size="13" fill="#A9824F">15:30</text>
-        <text x="185" y="733" font-family="Lora" font-weight="600" font-size="23" fill="#182219">«Птички и ягоды»</text>
-        <text x="185" y="756" font-family="IBM Plex Mono" font-size="11.5" fill="#8C8570">— не забудьте позавтракать заранее</text>
+        <g transform="translate(140,605)"><circle r="22" fill="#FBF8F1" stroke="#A9824F" stroke-width="1.3"/></g>
+        <text x="185" y="589" font-family="IBM Plex Mono" font-size="13" fill="#A9824F">после церемонии</text>
+        <text x="185" y="613" font-family="Lora" font-weight="600" font-size="23" fill="#182219">Прогулка и фото</text>
+        <text x="185" y="636" font-family="IBM Plex Mono" font-size="11.5" fill="#8C8570">— фотограф работает только здесь</text>
+
+        <g transform="translate(140,780)"><circle r="22" fill="#FBF8F1" stroke="#A9824F" stroke-width="1.3"/></g>
+        <text x="185" y="764" font-family="IBM Plex Mono" font-size="13" fill="#A9824F">15:30</text>
+        <text x="185" y="788" font-family="Lora" font-weight="600" font-size="23" fill="#182219">«Птички и ягоды»</text>
+        <text x="185" y="811" font-family="IBM Plex Mono" font-size="11.5" fill="#8C8570">— Приморское шоссе, 572</text>
 
         <g transform="translate(140,955)">
           <circle r="22" fill="#FBF8F1" stroke="#A9824F" stroke-width="1.3"/>
-          <g transform="translate(-11,-11) scale(0.55)">
-            <path d="M25 9A12 12 0 1025 31 9.5 9.5 0 0125 9z" fill="#A9824F"/>
-          </g>
+          <circle r="6" fill="#A9824F"/>
         </g>
-        <text x="185" y="939" font-family="IBM Plex Mono" font-size="13" fill="#A9824F">≈ 23:00</text>
-        <text x="185" y="963" font-family="Lora" font-weight="600" font-size="23" fill="#182219">Автово</text>
+        <text x="185" y="949" font-family="IBM Plex Mono" font-size="13" fill="#A9824F">≈ 23:00</text>
+        <text x="185" y="973" font-family="Lora" font-weight="600" font-size="23" fill="#182219">Автово</text>
       </svg>
 
-      <!-- mobile fallback list -->
       <div class="route-list">
-        <div class="rl-item">
-          <svg class="rl-icon" viewBox="0 0 40 40" fill="none"><rect x="9" y="10" width="22" height="16" rx="2.5" stroke="currentColor" stroke-width="1.4"/><line x1="9" y1="17" x2="31" y2="17" stroke="currentColor" stroke-width="1.2"/><line x1="16" y1="10" x2="16" y2="17" stroke="currentColor" stroke-width="1.2"/><line x1="24" y1="10" x2="24" y2="17" stroke="currentColor" stroke-width="1.2"/><circle cx="14" cy="28" r="2.2" stroke="currentColor" stroke-width="1.4"/><circle cx="26" cy="28" r="2.2" stroke="currentColor" stroke-width="1.4"/></svg>
-          <div><p class="route-time">08:30</p><p class="route-place">Автово</p><p class="caption-line" style="margin-top:8px;">вода в автобусе на весь день</p></div>
-        </div>
-        <div class="rl-item">
-          <svg class="rl-icon" viewBox="0 0 40 40" fill="none"><path d="M11 28V16L20 9L29 16V28" stroke="currentColor" stroke-width="1.4"/><line x1="8" y1="28" x2="32" y2="28" stroke="currentColor" stroke-width="1.4"/><line x1="20" y1="9" x2="20" y2="28" stroke="currentColor" stroke-width="1"/><rect x="17" y="21" width="6" height="7" stroke="currentColor" stroke-width="1"/></svg>
-          <div><p class="route-time">≈ 11:00</p><p class="route-place">Монрепо, церемония</p><p class="caption-line" style="margin-top:8px;">остановка по дороге, ближе к Выборгу</p></div>
-        </div>
-        <div class="rl-item">
-          <svg class="rl-icon" viewBox="0 0 40 40" fill="none"><rect x="8" y="14" width="24" height="17" rx="2" stroke="currentColor" stroke-width="1.4"/><path d="M15 14L17 10H23L25 14" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><circle cx="20" cy="23" r="5.5" stroke="currentColor" stroke-width="1.4"/></svg>
-          <div><p class="route-time">после церемонии</p><p class="route-place">Прогулка и фото</p><p class="caption-line" style="margin-top:8px;">фотограф работает только здесь</p></div>
-        </div>
-        <div class="rl-item">
-          <svg class="rl-icon" viewBox="0 0 40 40" fill="none"><path d="M20 32V10" stroke="currentColor" stroke-width="1.4"/><path d="M20 22C15 22 12 19 12 14" stroke="currentColor" stroke-width="1.2"/><path d="M20 16C25 16 28 13 28 9" stroke="currentColor" stroke-width="1.2"/><circle cx="12" cy="14" r="2.3" fill="currentColor"/><circle cx="28" cy="9" r="2.3" fill="currentColor"/><circle cx="20" cy="10" r="2.3" fill="currentColor"/></svg>
-          <div><p class="route-time">15:30</p><p class="route-place">«Птички и ягоды»</p><p class="caption-line" style="margin-top:8px;">не забудьте позавтракать заранее</p></div>
-        </div>
-        <div class="rl-item">
-          <svg class="rl-icon" viewBox="0 0 40 40" fill="none"><path d="M25 9A12 12 0 1025 31 9.5 9.5 0 0125 9z" fill="currentColor"/></svg>
-          <div><p class="route-time">≈ 23:00</p><p class="route-place">Автово</p></div>
-        </div>
+        <div class="rl-item"><div><p class="route-time">08:30</p><p class="route-place">Автово, Стачек 88</p><p class="caption-line" style="margin-top:8px;">автобус Yutong, вода на весь день</p></div></div>
+        <div class="rl-item"><div><p class="route-time">≈ 10:30</p><p class="route-place">Парк Монрепо</p><p class="caption-line" style="margin-top:8px;">по дороге остановка размяться</p></div></div>
+        <div class="rl-item"><div><p class="route-time">11:00</p><p class="route-place">Церемония во дворце</p><p class="caption-line" style="margin-top:8px;">на входе — «по групповому билету»</p></div></div>
+        <div class="rl-item"><div><p class="route-time">после церемонии</p><p class="route-place">Прогулка и фото</p><p class="caption-line" style="margin-top:8px;">фотограф работает только здесь</p></div></div>
+        <div class="rl-item"><div><p class="route-time">15:30</p><p class="route-place">«Птички и ягоды»</p><p class="caption-line" style="margin-top:8px;">Приморское шоссе, 572</p></div></div>
+        <div class="rl-item"><div><p class="route-time">≈ 23:00</p><p class="route-place">Автово</p></div></div>
       </div>
     </div>
   </div>
 </section>
-
-<div class="wrap-wide">
-  <!-- decorative divider -->
-  <svg width="100%" height="1" style="display:block;"><line x1="0" y1="0" x2="100%" y2="0" stroke="#DED2B8"/></svg>
-</div>
 
 <!-- ============ 01 АВТОБУС ============ -->
 <section class="story">
@@ -507,11 +542,10 @@
       <p>Автобус Yutong будет ждать вас неподалёку от станции метро Автово. Базовая точка сбора — <strong>Стачек, 88</strong>. Если возле неё окажется сложно припарковаться, не переживайте — оставляйте машину чуть дальше по проспекту или на соседней улице.</p>
       <p>Госномер автобуса сообщим вечером накануне.</p>
     </div>
-
     <div class="big-num-block">
       <p class="big-num">8:30</p>
       <p class="big-num-sub">Время отправления автобуса. Большая просьба не опаздывать, несмотря на раннее время. <strong>Приехать вовремя — самая сложная задача, которая вас ждёт. Дальше будет только приятное!</strong> Но ждать вас больше, чем 5–10 минут, автобус не сможет.</p>
-      <p class="caption-line">Если потеряетесь или возникнут любые другие трудности — обращайтесь к моему свидетелю Кириллу, его контакты чуть ниже.</p>
+      <p class="caption-line">Если потеряетесь или возникнут любые другие трудности — обращайтесь к моему свидетелю, его контакты чуть ниже.</p>
     </div>
   </div>
 </section>
@@ -541,22 +575,14 @@
           <p>Обязательно погуляем по Монрепо и пофотографируемся. Этот же автобус потом отвезёт нас в ресторан, а вечером — обратно к метро Автово.</p>
         </div>
       </div>
-      <div class="story-aside" style="position:relative;">
-        <svg class="deco" width="120" height="150" viewBox="0 0 120 150" style="right:-30px;top:-40px;" xmlns="http://www.w3.org/2000/svg">
-          <path d="M60 150V50" stroke="#C7A876" stroke-width="1"/>
-          <path d="M60 90C40 90 28 78 28 55" stroke="#C7A876" stroke-width="0.8" fill="none"/>
-          <path d="M60 65C80 65 92 53 92 30" stroke="#C7A876" stroke-width="0.8" fill="none"/>
-          <circle cx="28" cy="55" r="3" fill="#C7A876"/>
-          <circle cx="92" cy="30" r="3" fill="#C7A876"/>
-          <circle cx="60" cy="50" r="3" fill="#C7A876"/>
-        </svg>
+      <div class="story-aside">
         <p class="aside-quote">Наш фотограф будет работать только здесь, поэтому именно во время прогулки постараемся сделать самые красивые фотографии дня.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============ POSTER: ЦВЕТЫ ============ -->
+<!-- ============ POSTER ============ -->
 <section class="poster">
   <div class="wrap">
     <span class="eyebrow">Маленькая просьба</span>
@@ -572,7 +598,7 @@
       <span class="idx">03</span>
       <h2>«Птички и ягоды»</h2>
     </div>
-    <p class="route-intro" style="margin:0 0 40px;">Потом все дружно поедем на автобусе в ресторан «Птички и ягоды».</p>
+    <p class="route-intro" style="margin:0 0 40px;">Потом все дружно поедем на автобусе в ресторан «Птички и ягоды», Приморское шоссе, 572.</p>
     <div class="big-num-block" style="margin-top:0;">
       <p class="big-num">15:30</p>
       <p class="big-num-sub">Кормить будем сытно, вкусно и разнообразно, но только в районе этого времени. Так что, пожалуйста, <strong>плотно позавтракайте</strong>, чтобы потом не страдать. Примерно к 23:00 вернёмся к метро Автово.</p>
@@ -581,7 +607,7 @@
   </div>
 </section>
 
-<!-- ============ ДРЕСС-КОД ============ -->
+<!-- ============ 04 ДРЕСС-КОД ============ -->
 <section class="story on-pine">
   <div class="wrap">
     <div class="story-head">
@@ -607,12 +633,46 @@
     <span class="eyebrow">Если потеряетесь</span>
     <h2>Кирилл</h2>
     <p class="role">Свидетель, на связи весь день</p>
-    <a class="phone" href="tel:+79109666402">+7 910 966 64 02</a>
+    <a class="phone" href="tel:+70000000000">+7 (000) 000-00-00</a>
     <a class="tg" href="https://t.me/tepa46">Telegram @tepa46</a>
   </div>
 </section>
 
-<!-- ============ СКАЧАТЬ ЧЕК-ЛИСТ ============ -->
+<!-- ============ ФОТО / QR ============ -->
+<section class="photos">
+  <div class="wrap">
+    <div class="head">
+      <span class="eyebrow">Фотографии</span>
+      <h2>Общий альбом дня</h2>
+      <p class="lead">Один QR — два альбома внутри: место, куда можно скинуть свои кадры с телефонов, и папка со снимками от нашего фотографа. Всё в одном месте.</p>
+    </div>
+
+    <div class="qr-single">
+      <img class="qr-img-lg" alt="QR — альбомы свадьбы"
+           src="https://api.qrserver.com/v1/create-qr-code/?size=500x500&margin=0&data=https%3A%2F%2Fexample.com%2Falbums">
+      <a class="qr-link" href="https://example.com/albums">example.com/albums</a>
+
+      <div class="qr-legend">
+        <div class="qr-legend-item">
+          <span class="qr-legend-dot"></span>
+          <div>
+            <p class="qr-legend-title">Ваши фото</p>
+            <p class="qr-legend-desc">Загрузите кадры с телефона прямо в общий альбом.</p>
+          </div>
+        </div>
+        <div class="qr-legend-item">
+          <span class="qr-legend-dot"></span>
+          <div>
+            <p class="qr-legend-title">От фотографа</p>
+            <p class="qr-legend-desc">Здесь появится папка со снимками. Заглядывайте позже.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ СКАЧАТЬ PDF ============ -->
 <section class="download-band">
   <div class="wrap-wide row">
     <div>
@@ -624,15 +684,7 @@
 </section>
 
 <!-- ============ ФИНАЛ ============ -->
-<section class="final" style="position:relative;">
-  <svg class="deco" width="220" height="90" viewBox="0 0 220 90" style="left:50%;top:6vh;transform:translateX(-420px);opacity:0.3;" xmlns="http://www.w3.org/2000/svg">
-    <line x1="0" y1="45" x2="70" y2="45" stroke="#C7A876" stroke-width="0.8"/>
-    <circle cx="80" cy="45" r="2.4" fill="#C7A876"/>
-  </svg>
-  <svg class="deco" width="220" height="90" viewBox="0 0 220 90" style="right:50%;top:6vh;transform:translateX(420px);opacity:0.3;" xmlns="http://www.w3.org/2000/svg">
-    <line x1="150" y1="45" x2="220" y2="45" stroke="#C7A876" stroke-width="0.8"/>
-    <circle cx="140" cy="45" r="2.4" fill="#C7A876"/>
-  </svg>
+<section class="final">
   <div class="wrap">
     <span class="eyebrow">25 июля</span>
     <h2>Мы очень ждём этот день.<br>И ещё больше — встречи с вами.</h2>
@@ -644,12 +696,14 @@
   </div>
 </section>
 
-<script>
-  const io = new IntersectionObserver((entries)=>{
-    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); } });
-  }, {threshold:0.15});
-  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
-</script>
-
 </body>
 </html>
+
+
+
+							<script>
+                            	
+							</script>
+                        </body>
+                        </html>
+                    
