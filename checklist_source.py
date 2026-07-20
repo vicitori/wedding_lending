@@ -29,6 +29,7 @@ pdfmetrics.registerFont(TTFont("Sans-Semi",     f"{_FONT_DIR}/raleway-v37-cyrill
 SAGE            = (42 / 255, 58 / 255, 42 / 255)
 PAPER           = (252 / 255, 250 / 255, 245 / 255)
 CREAM           = (245 / 255, 241 / 255, 233 / 255)
+WARM_ZONE       = (246 / 255, 241 / 255, 232 / 255)     # tinted bg for top zone
 CHAMPAGNE       = (175 / 255, 145 / 255, 90 / 255)
 CHAMPAGNE_LIGHT = (205 / 255, 183 / 255, 142 / 255)
 INK             = (48 / 255, 46 / 255, 42 / 255)
@@ -53,7 +54,7 @@ LEFT_COL_RIGHT = W * 0.62
 RIGHT_COL_LEFT = LEFT_COL_RIGHT + COL_GAP
 RIGHT_COL_W = W - MARGIN - RIGHT_COL_LEFT
 
-FOOTER_H = 18 * mm
+FOOTER_H = 24 * mm
 
 # ---------------------------------------------------------
 # QR
@@ -135,7 +136,12 @@ def draw_qr_svg(x, y, size):
 # ===========================================================
 draw_background()
 
-# ---------- header (open, no color block) ----------
+# ---------- top zone: tinted background for header + checklist ----------
+TOP_ZONE_H = 80 * mm
+c.setFillColorRGB(*WARM_ZONE)
+c.rect(0, H - TOP_ZONE_H, W, TOP_ZONE_H, fill=1, stroke=0)
+
+# ---------- header ----------
 y = H - MARGIN
 
 c.setFillColorRGB(*STONE)
@@ -146,10 +152,7 @@ y -= 10 * mm
 c.setFillColorRGB(*INK)
 c.setFont("Serif-Bold", 26)
 c.drawCentredString(W / 2, y, "Путеводитель гостя")
-y -= 6 * mm
-
-divider(y, color=CHAMPAGNE, width=0.5)
-y -= 8 * mm
+y -= 12 * mm
 
 # ---------- todo checklist (full width) ----------
 section("Перед выходом", y)
@@ -167,9 +170,7 @@ for item in todo:
     c.drawString(text_x, y, item)
     y -= 7 * mm
 
-y += 1.5 * mm
-divider(y, x1=LEFT_COL_RIGHT)
-y -= 8 * mm
+y -= 6 * mm
 
 # ==========================================================
 # Two-column zone
@@ -177,7 +178,7 @@ y -= 8 * mm
 col_top_y = y
 
 # ---------- LEFT: route timeline ----------
-TIMELINE_PADDING = 5 * mm
+TIMELINE_PADDING = 4 * mm
 
 
 def timeline_item(y, time, title, text, is_last=False):
@@ -238,7 +239,7 @@ col_divider_x = LEFT_COL_RIGHT + COL_GAP / 2
 c.setStrokeColorRGB(*LINE)
 c.setLineWidth(0.4)
 c.line(col_divider_x, col_top_y + 3 * mm,
-       col_divider_x, FOOTER_H + 4 * mm)
+       col_divider_x, FOOTER_H + 6 * mm)
 
 # ---------- RIGHT: QR block ----------
 right_center_x = (col_divider_x + W - MARGIN) / 2
@@ -271,15 +272,20 @@ c.setFillColorRGB(*SAGE)
 c.rect(0, 0, W, FOOTER_H, fill=1, stroke=0)
 
 footer_cx = W / 2
+footer_mid = FOOTER_H / 2
 
 c.setFillColorRGB(*CHAMPAGNE_LIGHT)
 c.setFont("Sans", 7.5)
-c.drawCentredString(footer_cx, FOOTER_H - 5.5 * mm, "ЕСЛИ  ПОТЕРЯЕТЕСЬ")
+c.drawCentredString(footer_cx, footer_mid + 6 * mm, "ЕСЛИ  ПОТЕРЯЕТЕСЬ")
 
 c.setFillColorRGB(*CREAM)
-c.setFont("Serif", 11)
-c.drawCentredString(footer_cx, FOOTER_H / 2 - 2 * mm,
-                    "Кирилл  ·  +7 910 966 6402  ·  телеграм @tepa46")
+c.setFont("Serif-Bold", 13)
+c.drawCentredString(footer_cx, footer_mid, "Кирилл")
+
+c.setFillColorRGB(*CREAM)
+c.setFont("Serif", 10.5)
+c.drawCentredString(footer_cx, footer_mid - 5.5 * mm,
+                    "+7 910 966 6402  ·  телеграм @tepa46")
 
 # ---------------------------------------------------------
 c.showPage()
