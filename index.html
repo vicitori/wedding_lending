@@ -226,6 +226,24 @@
   .dropcap strong{color:var(--pine-deep);font-weight:600;}
   .story.on-pine .dropcap strong{color:var(--gold-soft);}
   .caption-line{font-family:var(--font-mono);font-size:12px;letter-spacing:0.05em;color:var(--stone);margin-top:26px;}
+
+  /* address callout */
+  .address-callout{
+    display:inline-block;margin:30px 0 0;
+    padding:18px 28px;
+    background:var(--parchment-warm);
+    border-left:3px solid var(--gold);
+    border-radius:0 6px 6px 0;
+  }
+  .address-callout-label{
+    font-family:var(--font-mono);font-size:10px;letter-spacing:0.14em;
+    text-transform:uppercase;color:var(--gold);margin:0 0 6px;
+  }
+  .address-callout-value{
+    font-family:var(--font-serif);font-weight:600;
+    font-size:clamp(24px,4vw,32px);color:var(--pine-deep);
+    margin:0;line-height:1.2;
+  }
   .story.on-pine .caption-line{color:var(--mist);}
 
   /* ================= MINI BLOCKS (break up dense info clusters) ================= */
@@ -614,7 +632,11 @@
     </div>
     <div class="dropcap">
       <p>Дорогие гости нашей свадьбы! Рассказываем более подробно обо всех организационных моментах, связанных с нашим замечательным днём.</p>
-      <p>Автобус Yutong будет ждать вас неподалёку от станции метро Автово. Базовая точка сбора&nbsp;— <strong>Стачек,&nbsp;88</strong>. Госномер автобуса сообщим вечером накануне.</p>
+      <p>Автобус Yutong будет ждать вас неподалёку от станции метро Автово. Госномер автобуса сообщим вечером накануне.</p>
+      <div class="address-callout">
+        <p class="address-callout-label">Точка сбора</p>
+        <p class="address-callout-value">пр. Стачек, 88</p>
+      </div>
     </div>
 
     <div class="big-num-block">
