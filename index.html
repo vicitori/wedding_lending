@@ -6,7 +6,7 @@
 <title>25 июля — путеводитель гостя</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root{
     --pine:#26362A;
@@ -17,13 +17,13 @@
     --stone:#8C8570;
     --parchment:#F3EEE3;
     --parchment-warm:#EAE2D2;
-    --gold:#A9824F;
-    --gold-soft:#C7A876;
+    --gold:#B59B73;
+    --gold-soft:#C4AC82;
     --ink:#242420;
     --paper:#FBF8F1;
     --line:#DED2B8;
     --font-serif:'Lora',serif;
-    --font-mono:'IBM Plex Mono',monospace;
+    --font-mono:'DM Mono',monospace;
   }
   *{box-sizing:border-box;}
   html{scroll-behavior:smooth;}
@@ -95,27 +95,27 @@
 
   .hero-main{position:relative;z-index:2;padding:0 32px;display:flex;flex-direction:column;align-items:center;text-align:center;max-width:900px;margin:0 auto;}
   .hero-num{
-    font-weight:600;
-    font-size:clamp(160px,32vw,340px);
-    line-height:0.82;
+    font-weight:700;
+    font-size:clamp(200px,42vw,440px);
+    line-height:0.78;
     margin:0;
     color:var(--parchment);
-    letter-spacing:-0.02em;
+    letter-spacing:-0.03em;
   }
   .hero-month{
     font-style:italic;
     font-weight:500;
     font-size:clamp(30px,5.5vw,52px);
-    margin:2px 0 0;
+    margin:24px 0 0;
     color:var(--gold-soft);
   }
   .hero-tagline{
     text-align:center;
     font-weight:400;
-    font-size:clamp(24px,4.4vw,38px);
-    line-height:1.28;
-    max-width:520px;
-    margin:38px 0 0;
+    font-size:clamp(22px,4vw,34px);
+    line-height:1.35;
+    max-width:480px;
+    margin:52px 0 0;
     color:#E6E0CE;
   }
   .hero-bottom{position:absolute;left:50%;transform:translateX(-50%);bottom:40px;z-index:2;text-align:center;display:block;width:100%;}
@@ -123,16 +123,16 @@
   .hero-line{color:var(--mist);font-family:var(--font-mono);font-size:12px;letter-spacing:0.04em;}
 
   /* ================= QUIET SCREEN ================= */
-  .quiet{background:var(--pine-deep);color:var(--parchment);padding:8vh 0 16vh;text-align:center;}
-  .quiet-mark{margin:0 auto 48px;display:block;opacity:0.7;}
+  .quiet{background:var(--parchment-warm);padding:10vh 0 14vh;text-align:center;}
+  .quiet-mark{margin:0 auto 48px;display:block;opacity:0.5;}
   .quiet p{
     font-style:italic;
     font-weight:400;
-    font-size:clamp(28px,5.6vw,52px);
-    line-height:1.42;
+    font-size:clamp(24px,4.8vw,44px);
+    line-height:1.48;
     margin:0 auto;
-    max-width:680px;
-    color:#F1ECDD;
+    max-width:580px;
+    color:var(--pine-deep);
   }
   .quiet .attr{
     display:block;
@@ -141,7 +141,7 @@
     font-style:normal;
     font-size:11px;
     letter-spacing:0.16em;
-    color:var(--gold-soft);
+    color:var(--gold);
     text-transform:uppercase;
   }
 
@@ -289,36 +289,36 @@
 
   /* ================= CONTACT ================= */
   .contact-screen{
-    background:var(--pine-deep);color:var(--parchment);
-    padding:16vh 0;text-align:center;
+    background:var(--paper);padding:16vh 0;text-align:center;
   }
-  .contact-screen .eyebrow{color:var(--gold-soft);display:block;margin-bottom:48px;}
+  .contact-screen .eyebrow{color:var(--gold);display:block;margin-bottom:48px;}
   .contact-portrait{
-    width:200px;max-width:60%;aspect-ratio:3/4;
+    width:260px;max-width:65%;aspect-ratio:3/4;
     object-fit:cover;object-position:center top;
-    filter:grayscale(0.15);
-    display:block;margin:0 auto 40px;
+    filter:grayscale(0.12);
+    display:block;margin:0 auto 44px;
   }
   .contact-screen h2{
     font-family:var(--font-serif);font-weight:600;font-style:italic;
     font-size:clamp(48px,10vw,96px);
-    margin:0 0 8px;color:var(--parchment);
+    margin:0 0 8px;color:var(--pine-deep);
   }
   .contact-screen .role{
     font-family:var(--font-mono);font-size:12px;letter-spacing:0.12em;
-    text-transform:uppercase;color:var(--mist);margin:0 0 48px;
+    text-transform:uppercase;color:var(--stone);margin:0 0 48px;
   }
   .contact-screen .phone{
     font-family:var(--font-serif);font-weight:600;
     font-size:clamp(28px,5vw,38px);
-    color:var(--gold-soft);text-decoration:none;display:inline-block;
+    color:var(--pine-deep);text-decoration:none;display:inline-block;
   }
+  .contact-screen .phone:hover{color:var(--gold);}
   .contact-screen .tg{
     display:block;margin-top:14px;
     font-family:var(--font-mono);font-size:13px;letter-spacing:0.05em;
-    color:var(--mist);text-decoration:none;
+    color:var(--gold);text-decoration:none;
   }
-  .contact-screen .tg:hover{color:var(--parchment);}
+  .contact-screen .tg:hover{color:var(--pine-deep);}
 
   /* ================= DOWNLOAD BAND ================= */
   .download-band{padding:64px 0;background:var(--parchment);border-bottom:1px solid var(--line);}
@@ -352,7 +352,7 @@
   }
   /* tablet: hero numeral was overflowing/too dominant between 720–1000px */
   @media(max-width:1000px){
-    .hero-num{font-size:clamp(120px,24vw,220px);}
+    .hero-num{font-size:clamp(140px,32vw,280px);}
   }
   /* very wide monitors: hero felt like an empty void at full 100vh */
   @media(min-width:1400px){
@@ -375,7 +375,7 @@
   font-size:clamp(32px,5.5vw,52px);margin:0 0 20px;color:var(--pine-deep);
 }
 .photos .lead{
-  font-size:17px;line-height:1.7;color:#4A473D;
+  font-style:italic;font-size:19px;line-height:1.7;color:var(--pine-deep);
   max-width:420px;margin:0 auto 60px;
 }
 .photos .qr-img{
@@ -416,7 +416,7 @@
   <div class="hero-main">
     <p class="hero-num">25</p>
     <p class="hero-month">июля, суббота</p>
-    <p class="hero-tagline">Один день,<br>который мы будем<br>вспоминать всю жизнь.</p>
+    <p class="hero-tagline">Один день, который мы будем<br>вспоминать всю жизнь.</p>
   </div>
 
   <div class="hero-bottom wrap">
@@ -428,8 +428,8 @@
 <section class="quiet">
   <div class="wrap">
     <svg class="quiet-mark" width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="17" cy="17" r="13" stroke="#C7A876" stroke-width="1"/>
-      <circle cx="17" cy="17" r="2" fill="#C7A876"/>
+      <circle cx="17" cy="17" r="13" stroke="var(--gold)" stroke-width="1"/>
+      <circle cx="17" cy="17" r="2" fill="var(--gold)"/>
     </svg>
     <p>Приехать вовремя — самая&nbsp;сложная задача, которая вас ждёт.<br>Дальше будет только приятное.<span class="attr">Из напутствия молодожёнов</span></p>
   </div>
@@ -532,9 +532,17 @@
   </div>
 </section>
 
-<div class="wrap-wide">
-  <!-- decorative divider -->
-  <svg width="100%" height="1" style="display:block;"><line x1="0" y1="0" x2="100%" y2="0" stroke="#DED2B8"/></svg>
+<!-- decorative botanical divider -->
+<div style="text-align:center;padding:60px 0;">
+  <svg width="80" height="120" viewBox="0 0 80 120" fill="none" xmlns="http://www.w3.org/2000/svg" style="opacity:0.4;">
+    <path d="M40 120V30" stroke="var(--gold)" stroke-width="0.8"/>
+    <path d="M40 85C28 85 20 75 20 60" stroke="var(--gold)" stroke-width="0.7" fill="none"/>
+    <path d="M40 65C52 65 60 55 60 40" stroke="var(--gold)" stroke-width="0.7" fill="none"/>
+    <path d="M40 45C32 45 26 37 26 25" stroke="var(--gold)" stroke-width="0.7" fill="none"/>
+    <circle cx="20" cy="60" r="2" fill="var(--gold)"/>
+    <circle cx="60" cy="40" r="2" fill="var(--gold)"/>
+    <circle cx="26" cy="25" r="2" fill="var(--gold)"/>
+  </svg>
 </div>
 
 <!-- ============ 01 АВТОБУС ============ -->
@@ -609,7 +617,16 @@
   </div>
 </section>
 
-
+<!-- decorative leaf -->
+<div style="text-align:center;padding:50px 0;">
+  <svg width="60" height="90" viewBox="0 0 60 90" fill="none" xmlns="http://www.w3.org/2000/svg" style="opacity:0.35;">
+    <path d="M30 90V20" stroke="var(--gold)" stroke-width="0.8"/>
+    <path d="M30 60C20 60 14 50 14 38" stroke="var(--gold)" stroke-width="0.7" fill="none"/>
+    <path d="M30 40C40 40 46 30 46 18" stroke="var(--gold)" stroke-width="0.7" fill="none"/>
+    <circle cx="14" cy="38" r="1.8" fill="var(--gold)"/>
+    <circle cx="46" cy="18" r="1.8" fill="var(--gold)"/>
+  </svg>
+</div>
 
 <!-- ============ 03 РЕСТОРАН ============ -->
 <section class="story">
@@ -628,11 +645,11 @@
 </section>
 
 <!-- ============ ДРЕСС-КОД ============ -->
-<section class="story on-pine">
+<section class="story">
   <div class="wrap">
     <div class="story-head">
       <span class="idx">04</span>
-      <h2>Дресс-код</h2>
+      <h2>Что надеть</h2>
     </div>
     <div class="dropcap">
       <p>Дресс-код достаточно неформальный: <strong>чёрные джинсы вполне могут заменить брюки, а&nbsp;кроссовки&nbsp;— туфли</strong>. В женских образах просим по возможности отдать предпочтение спокойным пастельным оттенкам. Но самое главное — чтобы вам было красиво&nbsp;и&nbsp;удобно!</p>
@@ -645,10 +662,9 @@
   <div class="wrap">
     <span class="eyebrow">Фотографии</span>
     <h2>Общий альбом дня</h2>
-    <p class="lead">Скидывайте свои кадры и ищите себя на&nbsp;фотографиях&nbsp;— всё в&nbsp;одном месте.</p>
     <img class="qr-img" alt="QR — альбомы свадьбы" src="qr.svg">
     <a class="qr-open" href="https://disk.yandex.ru/d/k483YWgfwVIvRw">Открыть альбом ↗</a>
-    <p class="qr-note">Загружайте фото с&nbsp;телефона прямо в&nbsp;альбом. Профессиональные снимки появятся чуть позже&nbsp;— заглядывайте и&nbsp;ищите себя!</p>
+    <p class="qr-note">После свадьбы именно здесь появятся ваши воспоминания.<br>Скидывайте кадры с&nbsp;телефона, а&nbsp;снимки фотографа появятся чуть позже.</p>
   </div>
 </section>
 
@@ -674,11 +690,12 @@
 <!-- ============ ФИНАЛ ============ -->
 <section class="final">
   <div class="wrap">
-    <span class="eyebrow">25 июля</span>
-    <h2>Мы очень ждём этот день.<br>И ещё больше — встречи с вами.</h2>
+    <p class="hero-num" style="color:var(--parchment);font-size:clamp(120px,28vw,280px);margin:0;line-height:0.8;">25</p>
+    <p class="hero-month" style="margin:16px 0 0;">июля</p>
+    <h2 style="margin-top:48px;">Спасибо,<br>что будете рядом.</h2>
     <svg class="fig" width="46" height="30" viewBox="0 0 46 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="18" cy="15" r="11.5" stroke="#C7A876" stroke-width="1"/>
-      <circle cx="29" cy="15" r="11.5" stroke="#C7A876" stroke-width="1"/>
+      <circle cx="18" cy="15" r="11.5" stroke="var(--gold-soft)" stroke-width="1"/>
+      <circle cx="29" cy="15" r="11.5" stroke="var(--gold-soft)" stroke-width="1"/>
     </svg>
   </div>
 </section>
