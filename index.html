@@ -227,23 +227,7 @@
   .story.on-pine .dropcap strong{color:var(--gold-soft);}
   .caption-line{font-family:var(--font-mono);font-size:12px;letter-spacing:0.05em;color:var(--stone);margin-top:26px;}
 
-  /* address callout */
-  .address-callout{
-    display:inline-block;margin:30px 0 0;
-    padding:18px 28px;
-    background:var(--parchment-warm);
-    border-left:3px solid var(--gold);
-    border-radius:0 6px 6px 0;
-  }
-  .address-callout-label{
-    font-family:var(--font-mono);font-size:10px;letter-spacing:0.14em;
-    text-transform:uppercase;color:var(--gold);margin:0 0 6px;
-  }
-  .address-callout-value{
-    font-family:var(--font-serif);font-weight:600;
-    font-size:clamp(24px,4vw,32px);color:var(--pine-deep);
-    margin:0;line-height:1.2;
-  }
+
   .story.on-pine .caption-line{color:var(--mist);}
 
   /* ================= MINI BLOCKS (break up dense info clusters) ================= */
@@ -305,72 +289,57 @@
 
   /* ================= CONTACT ================= */
   .contact-screen{
-    background:var(--pine);padding:130px 0;
-    position:relative;overflow:hidden;
-  }
-  /* decorative large number in background */
-  .contact-screen::before{
-    content:'☎';position:absolute;right:-40px;top:50%;transform:translateY(-50%);
-    font-size:clamp(200px,30vw,400px);color:rgba(255,255,255,0.03);
-    pointer-events:none;z-index:0;
+    background:var(--parchment-warm);padding:130px 0;
+    position:relative;
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
   }
   .contact-grid{
-    position:relative;z-index:1;
-    display:grid;grid-template-columns:240px 1fr;gap:56px;
-    align-items:center;max-width:680px;margin:0 auto;
+    display:grid;grid-template-columns:220px 1fr;gap:56px;
+    align-items:center;max-width:660px;margin:0 auto;
   }
   @media(max-width:720px){
     .contact-grid{grid-template-columns:1fr;justify-items:center;text-align:center;gap:40px;}
-    .contact-portrait-wrap{max-width:220px;}
-  }
-  .contact-portrait-wrap{
-    position:relative;width:100%;
-  }
-  .contact-portrait-wrap::before{
-    content:'';position:absolute;
-    top:-10px;left:-10px;right:10px;bottom:10px;
-    border:1px solid rgba(199,168,118,0.35);border-radius:8px;
+    .contact-portrait{max-width:200px;}
   }
   .contact-portrait{
-    position:relative;z-index:1;
     width:100%;aspect-ratio:3/4;object-fit:cover;object-position:center top;
-    border-radius:6px;filter:grayscale(0.12);
-    box-shadow:0 8px 40px rgba(0,0,0,0.35);
+    border-radius:6px;filter:grayscale(0.15);
+    box-shadow:0 6px 28px rgba(0,0,0,0.1);
   }
-  .contact-info .eyebrow{color:var(--gold-soft);display:block;margin-bottom:18px;}
+  .contact-info .eyebrow{color:var(--gold);display:block;margin-bottom:18px;}
   .contact-info h2{
     font-family:var(--font-serif);
     font-weight:600;
     font-style:italic;
     font-size:clamp(40px,7.5vw,64px);
-    margin:0 0 8px;
-    color:var(--parchment);
+    margin:0 0 6px;
+    color:var(--pine-deep);
     line-height:1.05;
   }
   .contact-info .role{
-    font-size:15px;color:var(--mist);margin:0 0 32px;
+    font-size:15px;color:var(--stone);margin:0 0 30px;
     line-height:1.6;
-    border-bottom:1px solid rgba(247,242,221,0.15);padding-bottom:24px;
   }
   .contact-info .phone{
     font-family:var(--font-serif);
     font-weight:600;
     font-size:clamp(22px,4vw,28px);
-    color:var(--gold-soft);
+    color:var(--pine-deep);
     text-decoration:none;
     display:inline-block;
     letter-spacing:0.01em;
   }
-  .contact-info .phone:hover{color:var(--parchment);}
+  .contact-info .phone:hover{color:var(--gold);}
   .contact-info .tg{
-    display:inline-block;margin-top:18px;
+    display:inline-block;margin-top:16px;
     font-family:var(--font-mono);font-size:12px;letter-spacing:0.08em;
     text-transform:uppercase;
-    color:var(--pine);background:var(--gold-soft);text-decoration:none;
+    color:var(--parchment);background:var(--pine);text-decoration:none;
     padding:12px 22px;border-radius:4px;
-    transition:background 0.2s, color 0.2s;
+    transition:background 0.2s;
   }
-  .contact-info .tg:hover{background:var(--parchment);color:var(--pine-deep);}
+  .contact-info .tg:hover{background:var(--pine-deep);}
 
   /* ================= DOWNLOAD BAND ================= */
   .download-band{padding:64px 0;background:var(--parchment);border-bottom:1px solid var(--line);}
@@ -631,19 +600,14 @@
       <h2>Автобус и сбор</h2>
     </div>
     <div class="dropcap">
-      <p>Дорогие гости нашей свадьбы! Рассказываем более подробно обо всех организационных моментах, связанных с нашим замечательным днём.</p>
-      <p>Автобус Yutong будет ждать вас неподалёку от станции метро Автово. Госномер автобуса сообщим вечером накануне.</p>
-      <div class="address-callout">
-        <p class="address-callout-label">Точка сбора</p>
-        <p class="address-callout-value">пр. Стачек, 88</p>
-      </div>
+      <p>Дорогие гости нашей свадьбы! Рассказываем подробнее обо всех организационных моментах, связанных с нашим замечательным днём.</p>
+      <p>Автобус Yutong будет ждать вас неподалёку от станции метро Автово. Госномер сообщим вечером накануне.</p>
     </div>
 
     <div class="big-num-block">
       <p class="big-num">8:30</p>
-      <p class="big-num-sub">Время отправления автобуса. Большая просьба не опаздывать, несмотря на раннее время. Ждать вас больше, чем 5–10 минут, автобус не сможет.</p>
-
-      <p style="font-size:17px;line-height:1.7;color:#4A473D;margin:28px 0 0;max-width:500px;">Если потеряетесь или возникнут трудности&nbsp;— обращайтесь к свидетелю <strong>Кириллу</strong>, его контакты ниже.</p>
+      <p class="big-num-sub">Отправление от <strong>пр. Стачек,&nbsp;88</strong> у метро Автово. Большая просьба не опаздывать&nbsp;— ждать больше 5–10&nbsp;минут автобус не сможет.</p>
+      <p class="caption-line">Если потеряетесь&nbsp;— контакты свидетеля Кирилла ниже.</p>
     </div>
   </div>
 </section>
