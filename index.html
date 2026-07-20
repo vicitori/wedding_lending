@@ -286,7 +286,28 @@
   .story.on-pine .qa-final strong{color:var(--gold-soft);}
 
   /* ================= CONTACT ================= */
-  .contact-screen{background:var(--pine-deep);color:var(--parchment);padding:16vh 0;text-align:center;}
+  .contact-screen{
+    position:relative;overflow:hidden;
+    color:var(--parchment);padding:18vh 0;text-align:center;
+  }
+  .contact-bg{
+    position:absolute;inset:0;z-index:0;
+    background:var(--pine-deep);
+  }
+  .contact-bg img{
+    width:100%;height:100%;object-fit:cover;object-position:center 20%;
+    opacity:0.25;filter:grayscale(0.5);
+  }
+  .contact-bg::after{
+    content:'';position:absolute;inset:0;
+    background:linear-gradient(to bottom,
+      var(--pine-deep) 0%,
+      rgba(15,22,16,0.6) 40%,
+      rgba(15,22,16,0.7) 60%,
+      var(--pine-deep) 100%
+    );
+  }
+  .contact-screen .wrap{position:relative;z-index:1;}
   .contact-screen .eyebrow{color:var(--gold-soft);display:block;margin-bottom:26px;}
   .contact-screen h2{
     font-family:var(--font-serif);
@@ -297,13 +318,6 @@
     color:var(--parchment);
   }
   .contact-screen .role{font-size:15px;color:var(--mist);margin:0 0 46px;}
-  .contact-photo{
-    width:120px;height:120px;border-radius:50%;object-fit:cover;
-    border:2px solid var(--gold-soft);
-    box-shadow:0 4px 24px rgba(0,0,0,0.3);
-    margin:0 auto 28px;
-    display:block;
-  }
   .contact-screen .phone{
     font-family:var(--font-serif);
     font-weight:600;
@@ -660,9 +674,11 @@
 
 <!-- ============ КОНТАКТ ============ -->
 <section class="contact-screen">
+  <div class="contact-bg">
+    <img src="kirill.png" alt="">
+  </div>
   <div class="wrap">
     <span class="eyebrow">Если потеряетесь</span>
-    <img class="contact-photo" src="kirill.png" alt="Кирилл">
     <h2>Кирилл</h2>
     <p class="role">Свидетель, на связи весь день</p>
     <a class="phone" href="tel:+79109666402">+7 910 966 64 02</a>
