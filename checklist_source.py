@@ -9,279 +9,186 @@ from svglib.svglib import svg2rlg
 import os
 
 # ---------------------------------------------------------
-# Fonts — Cormorant Garamond (elegant serif) + Raleway (light sans)
+# Fonts — 4 styles only
 # ---------------------------------------------------------
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 _FONT_DIR = os.path.join(_SCRIPT_DIR, "fonts")
 
-pdfmetrics.registerFont(TTFont("Serif",        f"{_FONT_DIR}/cormorant-garamond-v21-cyrillic_latin-regular.ttf"))
-pdfmetrics.registerFont(TTFont("Serif-Bold",    f"{_FONT_DIR}/cormorant-garamond-v21-cyrillic_latin-700.ttf"))
-pdfmetrics.registerFont(TTFont("Serif-Italic",  f"{_FONT_DIR}/cormorant-garamond-v21-cyrillic_latin-italic.ttf"))
-pdfmetrics.registerFont(TTFont("Serif-Light",   f"{_FONT_DIR}/cormorant-garamond-v21-cyrillic_latin-300.ttf"))
-pdfmetrics.registerFont(TTFont("Serif-LightIt", f"{_FONT_DIR}/cormorant-garamond-v21-cyrillic_latin-300italic.ttf"))
-pdfmetrics.registerFont(TTFont("Sans",          f"{_FONT_DIR}/raleway-v37-cyrillic_latin-300.ttf"))
-pdfmetrics.registerFont(TTFont("Sans-Medium",   f"{_FONT_DIR}/raleway-v37-cyrillic_latin-regular.ttf"))
-pdfmetrics.registerFont(TTFont("Sans-Semi",     f"{_FONT_DIR}/raleway-v37-cyrillic_latin-600.ttf"))
+pdfmetrics.registerFont(TTFont("Serif",       f"{_FONT_DIR}/cormorant-garamond-v21-cyrillic_latin-regular.ttf"))
+pdfmetrics.registerFont(TTFont("Serif-Bold",   f"{_FONT_DIR}/cormorant-garamond-v21-cyrillic_latin-700.ttf"))
+pdfmetrics.registerFont(TTFont("Serif-Italic", f"{_FONT_DIR}/cormorant-garamond-v21-cyrillic_latin-italic.ttf"))
+pdfmetrics.registerFont(TTFont("Sans",         f"{_FONT_DIR}/raleway-v37-cyrillic_latin-600.ttf"))
 
 # ---------------------------------------------------------
-# Palette
+# Palette — 8 purposeful colors, no extras
 # ---------------------------------------------------------
-SAGE            = (42 / 255, 58 / 255, 42 / 255)
-PAPER           = (252 / 255, 250 / 255, 245 / 255)
-CREAM           = (245 / 255, 241 / 255, 233 / 255)
-WARM_ZONE       = (246 / 255, 241 / 255, 232 / 255)     # tinted bg for top zone
-CHAMPAGNE       = (175 / 255, 145 / 255, 90 / 255)
-CHAMPAGNE_LIGHT = (205 / 255, 183 / 255, 142 / 255)
-INK             = (48 / 255, 46 / 255, 42 / 255)
-INK_LIGHT       = (85 / 255, 82 / 255, 75 / 255)
-STONE           = (140 / 255, 133 / 255, 120 / 255)
-LINE            = (225 / 255, 218 / 255, 202 / 255)
-MIST            = (175 / 255, 190 / 255, 185 / 255)
+SAGE  = (42 / 255, 58 / 255, 42 / 255)
+PAPER = (252 / 255, 250 / 255, 245 / 255)
+WARM  = (242 / 255, 237 / 255, 227 / 255)
+CREAM = (245 / 255, 241 / 255, 233 / 255)
+GOLD  = (175 / 255, 145 / 255, 90 / 255)
+INK   = (48 / 255, 46 / 255, 42 / 255)
+SOFT  = (105 / 255, 100 / 255, 90 / 255)
+LINE  = (218 / 255, 212 / 255, 198 / 255)
 
 # ---------------------------------------------------------
-# Page geometry
+# Grid — every vertical spacing is a multiple of S
 # ---------------------------------------------------------
 W, H = A5
 MARGIN = 14 * mm
-CONTENT_W = W - 2 * MARGIN
+S = 4 * mm
 
-BOX_SIZE = 4 * mm
-BOX_TEXT_GAP = 6.5 * mm
+FOOTER_H = 7 * S       # 28mm
+TOP_ZONE_H = 18 * S    # 72mm
+QR_SIZE = 5 * S         # 20mm
 
-# Two-column layout
-COL_GAP = 6 * mm
-LEFT_COL_RIGHT = W * 0.62
-RIGHT_COL_LEFT = LEFT_COL_RIGHT + COL_GAP
-RIGHT_COL_W = W - MARGIN - RIGHT_COL_LEFT
-
-FOOTER_H = 34 * mm
-
-# ---------------------------------------------------------
-# QR
-# ---------------------------------------------------------
 QR_SVG_PATH = os.path.join(_SCRIPT_DIR, "qr.svg")
-
 c = canvas.Canvas("checklist.pdf", pagesize=A5)
-
-# ---------------------------------------------------------
-# Reusable primitives
-# ---------------------------------------------------------
-def draw_wrapped(x, y, text, width, font="Serif", size=11, leading=4.8 * mm, color=INK):
-    c.setFillColorRGB(*color)
-    c.setFont(font, size)
-    words = text.split()
-    line = ""
-    yy = y
-    for word in words:
-        test = (line + " " + word).strip()
-        if pdfmetrics.stringWidth(test, font, size) <= width:
-            line = test
-        else:
-            c.drawString(x, yy, line)
-            yy -= leading
-            line = word
-    if line:
-        c.drawString(x, yy, line)
-    return yy
-
-
-def checkbox(x, text_baseline_y, text_size=11):
-    cap_height = text_size * 0.7
-    box_bottom = text_baseline_y + cap_height / 2 - BOX_SIZE / 2
-    c.setStrokeColorRGB(*CHAMPAGNE)
-    c.setLineWidth(0.6)
-    c.rect(x, box_bottom, BOX_SIZE, BOX_SIZE, stroke=1, fill=0)
-    return x + BOX_TEXT_GAP
-
-
-def divider(y, x0=MARGIN, x1=None, color=LINE, width=0.4):
-    if x1 is None:
-        x1 = W - MARGIN
-    c.setStrokeColorRGB(*color)
-    c.setLineWidth(width)
-    c.line(x0, y, x1, y)
-
-
-def section(title, y, x=MARGIN, color=CHAMPAGNE):
-    c.setFillColorRGB(*color)
-    c.setFont("Sans-Semi", 8)
-    spaced = "  ".join(title.upper())
-    c.drawString(x, y, spaced)
-
-
-def section_centered(title, y, center_x, color=CHAMPAGNE):
-    c.setFillColorRGB(*color)
-    c.setFont("Sans-Semi", 8)
-    spaced = "  ".join(title.upper())
-    c.drawCentredString(center_x, y, spaced)
-
-
-def draw_background():
-    c.setFillColorRGB(*PAPER)
-    c.rect(0, 0, W, H, fill=1, stroke=0)
 
 
 def draw_qr_svg(x, y, size):
-    drawing = svg2rlg(QR_SVG_PATH)
-    sx = size / drawing.width
-    sy = size / drawing.height
-    drawing.width = size
-    drawing.height = size
-    drawing.scale(sx, sy)
-    renderPDF.draw(drawing, c, x, y)
+    d = svg2rlg(QR_SVG_PATH)
+    sx, sy = size / d.width, size / d.height
+    d.width = d.height = size
+    d.scale(sx, sy)
+    renderPDF.draw(d, c, x, y)
 
 
-# ===========================================================
-# SINGLE PAGE
-# ===========================================================
-draw_background()
+# ==========================================================
+# PAGE
+# ==========================================================
 
-# ---------- top zone: tinted background for header + checklist ----------
-TOP_ZONE_H = 80 * mm
-c.setFillColorRGB(*WARM_ZONE)
+# Background
+c.setFillColorRGB(*PAPER)
+c.rect(0, 0, W, H, fill=1, stroke=0)
+
+# Top zone — warm tint
+c.setFillColorRGB(*WARM)
 c.rect(0, H - TOP_ZONE_H, W, TOP_ZONE_H, fill=1, stroke=0)
 
-# ---------- header ----------
-y = H - MARGIN
+# Bottom zone — warm tint for QR area
+BOTTOM_ZONE_H = 7 * S   # 28mm from footer top
+c.setFillColorRGB(*WARM)
+c.rect(0, FOOTER_H, W, BOTTOM_ZONE_H, fill=1, stroke=0)
 
-c.setFillColorRGB(*STONE)
-c.setFont("Sans-Medium", 8)
-c.drawCentredString(W / 2, y, "25 июля  ·  Выборг")
-y -= 10 * mm
+# ---------- Header ----------
+y = H - 3 * S
+
+c.setFillColorRGB(*SOFT)
+c.setFont("Sans", 8)
+c.drawCentredString(W / 2, y, "25 ИЮЛЯ · ВЫБОРГ")
+
+y -= 3 * S
 
 c.setFillColorRGB(*INK)
-c.setFont("Serif-Bold", 26)
+c.setFont("Serif-Bold", 28)
 c.drawCentredString(W / 2, y, "Памятка гостя")
-y -= 12 * mm
 
-# ---------- todo checklist (full width) ----------
-section("Перед выходом", y)
-y -= 6 * mm
+y -= 4 * S
 
-todo = [
-    "Плотно позавтракать",
-    "Приехать к 8:30 на Стачек, 88",
-    "Зарядить телефон",
-]
-for item in todo:
-    text_x = checkbox(MARGIN, y, text_size=11)
+# ---------- Checklist ----------
+# Shared axis for timeline dots, checkboxes, QR
+DOT_X = MARGIN + S
+TEXT_X = MARGIN + 3 * S
+
+c.setFillColorRGB(*GOLD)
+c.setFont("Sans", 8)
+c.drawString(TEXT_X, y, "ПЕРЕД ВЫХОДОМ")
+
+y -= 2 * S
+
+for item in ["Плотно позавтракать",
+             "Приехать к 8:30 на Стачек, 88",
+             "Зарядить телефон"]:
+    # Box centered on DOT_X axis
+    box_y = y - 0.5 * mm
+    c.setStrokeColorRGB(*GOLD)
+    c.setLineWidth(0.6)
+    c.rect(DOT_X - S / 2, box_y, S, S, stroke=1, fill=0)
+
     c.setFillColorRGB(*INK)
-    c.setFont("Serif", 11)
-    c.drawString(text_x, y, item)
-    y -= 7 * mm
+    c.setFont("Serif", 12)
+    c.drawString(TEXT_X, y, item)
+    y -= 2 * S
 
-y -= 6 * mm
+y -= 2 * S
 
-# ==========================================================
-# Two-column zone
-# ==========================================================
-col_top_y = y
+# ---------- Timeline ----------
+c.setFillColorRGB(*GOLD)
+c.setFont("Sans", 8)
+c.drawString(TEXT_X, y, "МАРШРУТ ДНЯ")
 
-# ---------- LEFT: route timeline ----------
-TIMELINE_PADDING = 4 * mm
-
-
-def timeline_item(y, time, title, is_last=False):
-    line_x = MARGIN + 5 * mm
-    text_x = MARGIN + 16 * mm
-
-    # Time — large, bold, the anchor of each item
-    c.setFillColorRGB(*INK)
-    c.setFont("Sans-Semi", 11)
-    c.drawString(text_x, y, time)
-
-    # Dot — aligned to time baseline
-    c.setFillColorRGB(*CHAMPAGNE)
-    c.circle(line_x, y + 1.5 * mm, 1.6 * mm, stroke=0, fill=1)
-
-    # Title
-    c.setFillColorRGB(*SAGE)
-    c.setFont("Serif-Bold", 13)
-    c.drawString(text_x, y - 5.5 * mm, title)
-
-    next_y = y - 12 * mm
-
-    # Connecting line
-    if not is_last:
-        c.setStrokeColorRGB(*LINE)
-        c.setLineWidth(0.5)
-        c.line(line_x, y - 0.2 * mm, line_x, next_y + 3 * mm)
-
-    return next_y
-
-
-section("Маршрут дня", col_top_y)
-y_left = col_top_y - 7 * mm
+y -= 2 * S
 
 route = [
-    ("08:30", "Автобус от Автово, Стачек 88"),
-    ("11:00", "Парк Монрепо"),
-    ("12:00", "Регистрация"),
-    ("15:30", "Ресторан «Птички и ягоды»"),
-    ("≈ 21:00", "Домой, приезд ≈ 23:00"),
+    ("08:30",   "Автобус от Автово, Стачек 88"),
+    ("11:00",   "Приезжаем в Монрепо"),
+    ("12:00",   "Регистрация"),
+    ("15:30",   "Начало банкета"),
+    ("~21:00",  "Выезжаем домой, приезд ~23:00"),
 ]
-for i, (time_label, title) in enumerate(route):
-    is_last = i == len(route) - 1
-    y_left = timeline_item(y_left, time_label, title, is_last=is_last)
 
-# ---------- Vertical divider between columns ----------
-col_divider_x = LEFT_COL_RIGHT + COL_GAP / 2
-c.setStrokeColorRGB(*LINE)
-c.setLineWidth(0.4)
-c.line(col_divider_x, col_top_y + 3 * mm,
-       col_divider_x, FOOTER_H + 6 * mm)
+for i, (time, title) in enumerate(route):
+    is_last = (i == len(route) - 1)
 
-# ---------- RIGHT: QR block ----------
-right_center_x = (col_divider_x + W - MARGIN) / 2
+    # Dot — vertically centered on time text (~cap height / 2)
+    dot_cy = y + 1 * mm
+    c.setFillColorRGB(*GOLD)
+    c.circle(DOT_X, dot_cy, 1.6 * mm, stroke=0, fill=1)
 
-section_centered("Фотографии", col_top_y, right_center_x)
-y_right = col_top_y - 7 * mm
+    # Time — large, prominent
+    c.setFillColorRGB(*INK)
+    c.setFont("Sans", 12)
+    c.drawString(TEXT_X, y, time)
 
-c.setFillColorRGB(*INK_LIGHT)
-c.setFont("Serif-Italic", 10)
-c.drawCentredString(right_center_x, y_right, "Присылайте фотографии")
-y_right -= 4.5 * mm
-c.drawCentredString(right_center_x, y_right, "с торжества")
-y_right -= 7 * mm
+    # Title — below time, softer
+    c.setFillColorRGB(*SOFT)
+    c.setFont("Serif", 11)
+    c.drawString(TEXT_X, y - 5 * mm, title)
 
-QR_SIZE = 26 * mm
-qr_x = right_center_x - QR_SIZE / 2
-qr_y = y_right - QR_SIZE
+    next_y = y - 3 * S
 
-QR_FRAME_PAD = 1.5 * mm
-c.setStrokeColorRGB(*CHAMPAGNE)
-c.setLineWidth(0.4)
-c.rect(qr_x - QR_FRAME_PAD, qr_y - QR_FRAME_PAD,
-       QR_SIZE + 2 * QR_FRAME_PAD, QR_SIZE + 2 * QR_FRAME_PAD,
-       stroke=1, fill=0)
+    # Connecting line — from bottom of dot to top of next dot
+    if not is_last:
+        next_dot_cy = next_y + 1 * mm
+        c.setStrokeColorRGB(*LINE)
+        c.setLineWidth(0.5)
+        c.line(DOT_X, dot_cy - 1.6 * mm, DOT_X, next_dot_cy + 1.6 * mm)
+
+    y = next_y
+
+y -= 2 * S
+
+# QR + label centered in content area (y to FOOTER_H)
+CAP_AND_DESC = 4 * mm
+total_block = QR_SIZE + S + CAP_AND_DESC
+block_top = (y + FOOTER_H) / 2 + total_block / 2
+block_top = min(block_top, y)  # don't exceed content top
+
+qr_x = W / 2 - QR_SIZE / 2
+qr_y = block_top - QR_SIZE
 
 draw_qr_svg(qr_x, qr_y, QR_SIZE)
 
-# ---------- footer ----------
+c.setFillColorRGB(*SAGE)
+c.setFont("Serif-Italic", 10)
+c.drawCentredString(W / 2, qr_y - 3 * mm, "присылайте фотографии с торжества")
+
+# ---------- Footer ----------
 c.setFillColorRGB(*SAGE)
 c.rect(0, 0, W, FOOTER_H, fill=1, stroke=0)
 
-footer_cx = W / 2
-footer_mid = FOOTER_H / 2
+mid = FOOTER_H / 2
 
 c.setFillColorRGB(*CREAM)
+c.setFont("Serif-Bold", 14)
+c.drawCentredString(W / 2, mid + S, "Свидетель Кирилл")
+
 c.setFont("Serif", 11)
-c.drawCentredString(footer_cx, footer_mid + 8 * mm,
-                    "Если потеряетесь или возникнут трудности —")
-c.drawCentredString(footer_cx, footer_mid + 3 * mm,
-                    "обращайтесь к свидетелю Кириллу")
+c.drawCentredString(W / 2, mid - S,
+                    "+7 910 966 6402  ·  телеграм @tepa46")
 
-c.setFillColorRGB(*CREAM)
-c.setFont("Serif-Bold", 13)
-c.drawCentredString(footer_cx, footer_mid - 4 * mm,
-                    "+7 910 966 6402")
-
-c.setFillColorRGB(*CHAMPAGNE_LIGHT)
-c.setFont("Sans-Medium", 9)
-c.drawCentredString(footer_cx, footer_mid - 10 * mm,
-                    "телеграм @tepa46")
-
-# ---------------------------------------------------------
+# ----------
 c.showPage()
 c.save()
 print("done")
