@@ -4,18 +4,19 @@ from reportlab.pdfgen import canvas
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.lib.units import mm
-from reportlab.graphics.barcode.qr import QrCodeWidget
-from reportlab.graphics.shapes import Drawing
 from reportlab.graphics import renderPDF
+from svglib.svglib import svg2rlg
+import os
 
 # ---------------------------------------------------------
 # Fonts
 # ---------------------------------------------------------
-pdfmetrics.registerFont(TTFont("Serif", "/usr/share/fonts/truetype/dejavu/DejaVuSerif.ttf"))
-pdfmetrics.registerFont(TTFont("Serif-Bold", "/usr/share/fonts/truetype/dejavu/DejaVuSerif-Bold.ttf"))
-pdfmetrics.registerFont(TTFont("Serif-Italic", "/usr/share/fonts/truetype/dejavu/DejaVuSerif-Italic.ttf"))
-pdfmetrics.registerFont(TTFont("Mono", "/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf"))
-pdfmetrics.registerFont(TTFont("Mono-Bold", "/usr/share/fonts/truetype/dejavu/DejaVuSansMono-Bold.ttf"))
+_FONT_DIR = "/Library/Fonts"
+pdfmetrics.registerFont(TTFont("Serif", f"{_FONT_DIR}/DejaVuSerif.ttf"))
+pdfmetrics.registerFont(TTFont("Serif-Bold", f"{_FONT_DIR}/DejaVuSerif-Bold.ttf"))
+pdfmetrics.registerFont(TTFont("Serif-Italic", f"{_FONT_DIR}/DejaVuSerif-Italic.ttf"))
+pdfmetrics.registerFont(TTFont("Mono", f"{_FONT_DIR}/DejaVuSansMono.ttf"))
+pdfmetrics.registerFont(TTFont("Mono-Bold", f"{_FONT_DIR}/DejaVuSansMono-Bold.ttf"))
 
 # ---------------------------------------------------------
 # Palette
@@ -40,13 +41,21 @@ CONTENT_W = W - 2 * MARGIN
 BOX_SIZE = 4 * mm
 BOX_TEXT_GAP = 6.5 * mm
 
-# ---------------------------------------------------------
-# Ссылки для QR — замени на свои!
-# ---------------------------------------------------------
-QR_UPLOAD_URL = "https://example.com/upload"      # куда гости загружают свои фото
-QR_GALLERY_URL = "https://example.com/gallery"    # папка с фото от фотографа
+# Two-column layout
+COL_GAP = 6 * mm
+LEFT_COL_RIGHT = W * 0.62
+RIGHT_COL_LEFT = LEFT_COL_RIGHT + COL_GAP
+RIGHT_COL_W = W - MARGIN - RIGHT_COL_LEFT
 
-c = canvas.Canvas("/home/claude/checklist.pdf", pagesize=A5)
+FOOTER_H = 30 * mm
+
+# ---------------------------------------------------------
+# QR-код (SVG-файл рядом со скриптом)
+# ---------------------------------------------------------
+_SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+QR_SVG_PATH = os.path.join(_SCRIPT_DIR, "qr.svg")
+
+c = canvas.Canvas("checklist.pdf", pagesize=A5)
 
 # ---------------------------------------------------------
 # Reusable primitives
@@ -87,10 +96,10 @@ def divider(y, x0=MARGIN, x1=None, color=LINE, width=0.55):
     c.line(x0, y, x1, y)
 
 
-def section(title, y, color=GOLD):
+def section(title, y, x=MARGIN, color=GOLD):
     c.setFillColorRGB(*color)
     c.setFont("Mono-Bold", 8.5)
-    c.drawString(MARGIN, y, title.upper())
+    c.drawString(x, y, title.upper())
 
 
 def draw_background():
@@ -98,241 +107,196 @@ def draw_background():
     c.rect(0, 0, W, H, fill=1, stroke=0)
 
 
-def new_page():
-    c.showPage()
-    draw_background()
-
-
-def draw_qr(x, y, size, data):
-    """Рисует QR-код с левого-нижнего угла (x, y), сторона size."""
-    qr = QrCodeWidget(data)
-    b = qr.getBounds()
-    w = b[2] - b[0]
-    h = b[3] - b[1]
-    d = Drawing(size, size, transform=[size / w, 0, 0, size / h, 0, 0])
-    d.add(qr)
-    renderPDF.draw(d, c, x, y)
+def draw_qr_svg(x, y, size):
+    """Рисует QR-код из qr.svg с левого-нижнего угла (x, y), сторона size."""
+    drawing = svg2rlg(QR_SVG_PATH)
+    sx = size / drawing.width
+    sy = size / drawing.height
+    drawing.width = size
+    drawing.height = size
+    drawing.scale(sx, sy)
+    renderPDF.draw(drawing, c, x, y)
 
 
 # ===========================================================
-# PAGE 1
+# SINGLE PAGE
 # ===========================================================
 draw_background()
 
 # ---------- header ----------
-HEADER_H = 44 * mm
+HEADER_H = 26 * mm
 c.setFillColorRGB(*PINE)
 c.rect(0, H - HEADER_H, W, HEADER_H, fill=1, stroke=0)
 
 c.setFillColorRGB(*GOLD_LIGHT)
-c.setFont("Mono", 7.3)
-c.drawString(MARGIN, H - 10 * mm, "25 ИЮЛЯ · ВЫБОРГ · СВАДЕБНЫЙ ЧЕК-ЛИСТ")
+c.setFont("Mono", 7)
+c.drawString(MARGIN, H - 9 * mm, "25 ИЮЛЯ · ВЫБОРГ · СВАДЕБНЫЙ ЧЕК-ЛИСТ")
 
 c.setFillColorRGB(*PARCHMENT)
-c.setFont("Serif-Bold", 22)
-c.drawString(MARGIN, H - 20 * mm, "Путеводитель гостя")
+c.setFont("Serif-Bold", 20)
+c.drawString(MARGIN, H - 19.5 * mm, "Путеводитель гостя")
 
-c.setFillColorRGB(*MIST)
-c.setFont("Serif-Italic", 9.3)
-c.drawString(MARGIN, H - 28 * mm, "Приехать вовремя — самая сложная задача.")
-c.drawString(MARGIN, H - 33 * mm, "Дальше будет только приятное.")
+y = H - HEADER_H - 7 * mm
 
-y = H - HEADER_H - 9 * mm
-
-# ---------- todo checklist ----------
+# ---------- todo checklist (full width) ----------
 section("Перед выходом", y)
-y -= 7 * mm
+y -= 6 * mm
 
 todo = [
     "Плотно позавтракать",
     "Приехать к 8:30 на Стачек, 88",
     "Зарядить телефон",
-    "Не брать цветы из города",
 ]
 for item in todo:
     text_x = checkbox(MARGIN, y, text_size=9.8)
     c.setFillColorRGB(*INK)
     c.setFont("Serif", 9.8)
     c.drawString(text_x, y, item)
-    y -= 7.5 * mm
+    y -= 7 * mm
 
 y += 1.5 * mm
-divider(y)
-y -= 9 * mm
+divider(y, x1=LEFT_COL_RIGHT)
+y -= 8 * mm
+
+# ==========================================================
+# Two-column zone: route (left) + QR (right)
+# ==========================================================
+col_top_y = y
+
+# ---------- LEFT: route timeline ----------
+TIMELINE_PADDING = 5 * mm
 
 
-# ---------- route timeline ----------
 def timeline_item(y, time, title, text, is_last=False):
     line_x = MARGIN + 5 * mm
-    text_x = MARGIN + 24 * mm
-    text_w = CONTENT_W - 25 * mm
+    text_x = MARGIN + 16 * mm
+    text_w = LEFT_COL_RIGHT - text_x
 
-    if not is_last:
-        c.setStrokeColorRGB(*LINE)
-        c.setLineWidth(0.7)
-        c.line(line_x, y + 1.5 * mm, line_x, y - 14.5 * mm)
-
+    # Dot
     c.setFillColorRGB(*GOLD)
-    c.circle(line_x, y, 1.6 * mm, stroke=0, fill=1)
+    c.circle(line_x, y, 1.4 * mm, stroke=0, fill=1)
 
+    # Time
     c.setFillColorRGB(*GOLD)
-    c.setFont("Mono-Bold", 8.6)
+    c.setFont("Mono-Bold", 8)
     c.drawString(text_x, y + 0.3 * mm, time)
 
+    # Title
     c.setFillColorRGB(*PINE)
-    c.setFont("Serif-Bold", 11.3)
-    c.drawString(text_x, y - 4.6 * mm, title)
+    c.setFont("Serif-Bold", 10.5)
+    c.drawString(text_x, y - 4.2 * mm, title)
 
-    draw_wrapped(text_x, y - 9.2 * mm, text, text_w, size=8.7, leading=3.9 * mm)
-    return y - 17.5 * mm
+    # Description — dynamic height
+    text_bottom = draw_wrapped(text_x, y - 8.5 * mm, text, text_w,
+                               size=8.2, leading=3.6 * mm)
+    next_y = text_bottom - TIMELINE_PADDING
+
+    # Connecting line to next item
+    if not is_last:
+        c.setStrokeColorRGB(*LINE)
+        c.setLineWidth(0.6)
+        c.line(line_x, y - 1.4 * mm, line_x, next_y + 1.4 * mm)
+
+    return next_y
 
 
-section("Маршрут дня", y)
-y -= 8 * mm
+section("Маршрут дня", col_top_y)
+y_left = col_top_y - 7 * mm
 
 route = [
     ("08:30", "Автобус от Автово",
-     "Yutong ждёт у метро Автово, ориентир — Стачек, 88. Госномер сообщим накануне. Ждём не дольше 5–10 минут."),
+     "Ждём у метро Автово, Стачек 88. Госномер сообщим накануне."),
     ("≈ 10:30", "Парк Монрепо",
-     "По дороге будет остановка размяться, в автобусе есть вода. На входе скажите, что вы по групповому билету на свадьбу."),
-    ("11:00", "Церемония во дворце",
-     "Регистрация проходит в дворце Монрепо. После официальной части — прогулка и фотографии в парке."),
+     "На входе скажите, что по групповому билету на свадьбу."),
+    ("11:00", "Церемония",
+     "Регистрация в дворце Монрепо, затем прогулка и фото в парке."),
     ("15:30", "Ресторан",
-     "«Птички и ягоды», Приморское шоссе, 572. Едем туда тем же автобусом."),
-    ("≈ 23:00", "Домой",
-     "Тем же автобусом возвращаемся к метро Автово."),
+     "«Птички и ягоды», Приморское шоссе, 572."),
+    ("≈ 21:00", "Домой",
+     "Выезд из ресторана, приезд к метро Автово около 23:00."),
 ]
 for i, (time_label, title, text) in enumerate(route):
     is_last = i == len(route) - 1
-    y = timeline_item(y, time_label, title, text, is_last=is_last)
+    y_left = timeline_item(y_left, time_label, title, text, is_last=is_last)
 
+# ---------- Vertical divider between columns ----------
+col_divider_x = LEFT_COL_RIGHT + COL_GAP / 2
+c.setStrokeColorRGB(*LINE)
+c.setLineWidth(0.5)
+c.line(col_divider_x, col_top_y + 3 * mm,
+       col_divider_x, FOOTER_H + 4 * mm)
 
-# ===========================================================
-# PAGE 2
-# ===========================================================
-new_page()
-y = H - 16 * mm
-FOOTER_H = 34 * mm
+# ---------- RIGHT: QR block ----------
+# Visual center between divider line and right margin
+right_center_x = (col_divider_x + W - MARGIN) / 2
 
-# ---------- important cards (2x2) ----------
-section("Важно помнить", y)
-y -= 9 * mm
+c.setFillColorRGB(*GOLD)
+c.setFont("Mono-Bold", 8.5)
+c.drawCentredString(right_center_x, col_top_y, "ФОТОГРАФИИ")
+y_right = col_top_y - 6 * mm
 
-left = MARGIN
-right = W / 2 + 2 * mm
-card_w = W / 2 - MARGIN - 4 * mm - BOX_TEXT_GAP
-
-cards = [
-    ("Позавтракайте", "Первый полноценный приём пищи будет только около 15:30.", left),
-    ("Вода будет", "В автобусе есть питьевая вода, по дороге будет остановка.", right),
-    ("Цветы не нужны", "Долгую дорогу не переживут — подарите при следующей встрече.", left),
-    ("Фотограф", "Красивые кадры делаем во время прогулки в Монрепо.", right),
-]
-
-row1_y = y
-row2_y = y - 22 * mm
-for i, (title, text, x) in enumerate(cards):
-    row_y = row1_y if i < 2 else row2_y
-    text_x = checkbox(x, row_y, text_size=10)
-    c.setFillColorRGB(*INK)
-    c.setFont("Serif-Bold", 10)
-    c.drawString(text_x, row_y, title)
-    draw_wrapped(text_x, row_y - 4.6 * mm, text, card_w, size=8.4, leading=3.7 * mm)
-
-y = row2_y - 16 * mm
-divider(y)
-y -= 10 * mm
-
-# ---------- dress code ----------
-section("Дресс-код", y)
-y -= 9 * mm
 c.setFillColorRGB(*INK)
-c.setFont("Serif-Bold", 11.5)
-c.drawString(MARGIN, y, "Свободный")
-y -= 6.5 * mm
-y = draw_wrapped(
-    MARGIN, y,
-    "Чёрные джинсы вполне заменят брюки, а кроссовки — туфли. Дамам будем рады видеть в спокойных пастельных оттенках, но главное — чтобы вам было красиво и удобно.",
-    CONTENT_W, size=9.6, leading=4.5 * mm,
-)
-y -= 9 * mm
-divider(y)
-y -= 10 * mm
+c.setFont("Serif-Italic", 8.2)
+c.drawCentredString(right_center_x, y_right, "Присылайте фотографии")
+y_right -= 4 * mm
+c.drawCentredString(right_center_x, y_right, "с торжества")
+y_right -= 6 * mm
 
-# ---------- QR block ----------
-section("Фотографии", y)
-y -= 8 * mm
-
-# Два QR по бокам
 QR_SIZE = 26 * mm
-qr_gap = 8 * mm
-total_qr_w = QR_SIZE * 2 + qr_gap
-qr_left_x = (W - total_qr_w) / 2
-qr_right_x = qr_left_x + QR_SIZE + qr_gap
+qr_x = right_center_x - QR_SIZE / 2
+qr_y = y_right - QR_SIZE
 
-qr_y_top = y  # верх зоны QR
-qr_y = qr_y_top - QR_SIZE
-
-# Рамки для акцента
+QR_FRAME_PAD = 1.5 * mm
 c.setStrokeColorRGB(*GOLD)
 c.setLineWidth(0.5)
-c.rect(qr_left_x - 2 * mm, qr_y - 2 * mm, QR_SIZE + 4 * mm, QR_SIZE + 4 * mm, stroke=1, fill=0)
-c.rect(qr_right_x - 2 * mm, qr_y - 2 * mm, QR_SIZE + 4 * mm, QR_SIZE + 4 * mm, stroke=1, fill=0)
+c.rect(qr_x - QR_FRAME_PAD, qr_y - QR_FRAME_PAD,
+       QR_SIZE + 2 * QR_FRAME_PAD, QR_SIZE + 2 * QR_FRAME_PAD,
+       stroke=1, fill=0)
 
-draw_qr(qr_left_x, qr_y, QR_SIZE, QR_UPLOAD_URL)
-draw_qr(qr_right_x, qr_y, QR_SIZE, QR_GALLERY_URL)
-
-# Подписи под QR
-label_y = qr_y - 6 * mm
-c.setFillColorRGB(*PINE)
-c.setFont("Serif-Bold", 9.5)
-c.drawCentredString(qr_left_x + QR_SIZE / 2, label_y, "Ваши фото")
-c.drawCentredString(qr_right_x + QR_SIZE / 2, label_y, "Фото от фотографа")
-
-c.setFillColorRGB(*STONE)
-c.setFont("Serif-Italic", 8.4)
-c.drawCentredString(qr_left_x + QR_SIZE / 2, label_y - 5 * mm, "загрузить сюда")
-c.drawCentredString(qr_right_x + QR_SIZE / 2, label_y - 5 * mm, "появятся позже")
-
-# Общий подзаголовок над QR
-c.setFillColorRGB(*INK)
-c.setFont("Serif", 9.3)
-c.drawCentredString(
-    W / 2, qr_y_top + 2 * mm,
-    "Скиньте свои кадры сюда — и здесь же появится папка от фотографа."
-)
+draw_qr_svg(qr_x, qr_y, QR_SIZE)
 
 # ---------- footer / contacts ----------
 c.setFillColorRGB(*PINE)
 c.rect(0, 0, W, FOOTER_H, fill=1, stroke=0)
 
+# Footer geometry: two zones split at page center
+footer_div_x = W / 2
+FOOTER_PAD = 5 * mm
+FOOTER_LINE_H = 5.5 * mm
+# 4 lines vertically centered: top = center + 1.5 * spacing
+footer_line_top = FOOTER_H / 2 + 1.5 * FOOTER_LINE_H
+
+# Left zone: contacts (left-aligned to MARGIN)
 c.setFillColorRGB(*GOLD_LIGHT)
-c.setFont("Mono", 7.5)
-c.drawString(MARGIN, 24 * mm, "ЕСЛИ ПОТЕРЯЕТЕСЬ")
+c.setFont("Mono", 7)
+c.drawString(MARGIN, footer_line_top, "ЕСЛИ ПОТЕРЯЕТЕСЬ")
 
 c.setFillColorRGB(*PARCHMENT)
-c.setFont("Serif-Bold", 14)
-c.drawString(MARGIN, 17.5 * mm, "Кирилл")
+c.setFont("Serif-Bold", 13)
+c.drawString(MARGIN, footer_line_top - FOOTER_LINE_H, "Кирилл")
 
 c.setFillColorRGB(*PARCHMENT)
-c.setFont("Serif", 11)
-c.drawString(MARGIN, 11.5 * mm, "+7 910 966 6402")
+c.setFont("Serif", 10)
+c.drawString(MARGIN, footer_line_top - 2 * FOOTER_LINE_H, "+7 910 966 6402")
 
 c.setFillColorRGB(*MIST)
-c.setFont("Mono", 8.5)
-c.drawString(MARGIN, 6 * mm, "@tepa46")
+c.setFont("Mono", 7.5)
+c.drawString(MARGIN, footer_line_top - 3 * FOOTER_LINE_H, "@tepa46")
 
-divider_x = W / 2 + 6 * mm
+# Divider (centered)
 c.setStrokeColorRGB(*GOLD)
 c.setLineWidth(0.4)
-c.line(divider_x, 6 * mm, divider_x, FOOTER_H - 6 * mm)
+c.line(footer_div_x, FOOTER_PAD, footer_div_x, FOOTER_H - FOOTER_PAD)
+
+# Right zone: message (centered in its half)
+right_msg_center = (footer_div_x + W - MARGIN) / 2
 
 c.setFillColorRGB(*PARCHMENT)
-c.setFont("Serif-Italic", 10.5)
-c.drawString(divider_x + 6 * mm, 20 * mm, "Очень ждём")
-c.drawString(divider_x + 6 * mm, 14.5 * mm, "этого дня")
-c.drawString(divider_x + 6 * mm, 9 * mm, "и встречи")
-c.drawString(divider_x + 6 * mm, 3.5 * mm, "с вами!")
+c.setFont("Serif-Italic", 9.5)
+c.drawCentredString(right_msg_center, footer_line_top, "Очень ждём")
+c.drawCentredString(right_msg_center, footer_line_top - FOOTER_LINE_H, "этого дня")
+c.drawCentredString(right_msg_center, footer_line_top - 2 * FOOTER_LINE_H, "и встречи")
+c.drawCentredString(right_msg_center, footer_line_top - 3 * FOOTER_LINE_H, "с вами!")
 
 # ---------------------------------------------------------
 c.showPage()
