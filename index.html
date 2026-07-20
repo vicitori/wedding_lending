@@ -287,52 +287,64 @@
 
   /* ================= CONTACT ================= */
   .contact-screen{
-    background:var(--paper);padding:130px 0;
-    border-top:1px solid var(--line);
-    border-bottom:1px solid var(--line);
+    background:var(--parchment-warm);padding:130px 0;
+    position:relative;
   }
   .contact-grid{
-    display:grid;grid-template-columns:240px 1fr;gap:56px;
-    align-items:center;max-width:660px;margin:0 auto;
+    display:grid;grid-template-columns:260px 1fr;gap:64px;
+    align-items:center;max-width:700px;margin:0 auto;
   }
   @media(max-width:720px){
-    .contact-grid{grid-template-columns:1fr;justify-items:center;text-align:center;gap:36px;}
-    .contact-portrait{max-width:220px;}
+    .contact-grid{grid-template-columns:1fr;justify-items:center;text-align:center;gap:40px;}
+    .contact-portrait-wrap{max-width:240px;}
+  }
+  .contact-portrait-wrap{
+    position:relative;width:100%;
+  }
+  .contact-portrait-wrap::before{
+    content:'';position:absolute;
+    top:-12px;left:-12px;right:12px;bottom:12px;
+    border:1px solid var(--gold-soft);border-radius:8px;
   }
   .contact-portrait{
+    position:relative;z-index:1;
     width:100%;aspect-ratio:3/4;object-fit:cover;object-position:center top;
-    border-radius:6px;filter:grayscale(0.15);
-    box-shadow:0 4px 24px rgba(0,0,0,0.1);
-    border:1px solid var(--line);
+    border-radius:6px;filter:grayscale(0.12);
+    box-shadow:0 6px 32px rgba(0,0,0,0.12);
   }
-  .contact-info .eyebrow{color:var(--gold);display:block;margin-bottom:16px;}
+  .contact-info .eyebrow{color:var(--gold);display:block;margin-bottom:18px;}
   .contact-info h2{
     font-family:var(--font-serif);
     font-weight:600;
     font-style:italic;
-    font-size:clamp(38px,7vw,58px);
-    margin:0 0 6px;
+    font-size:clamp(40px,7.5vw,64px);
+    margin:0 0 8px;
     color:var(--pine-deep);
     line-height:1.05;
   }
   .contact-info .role{
-    font-size:15px;color:var(--stone);margin:0 0 32px;
+    font-size:15px;color:var(--stone);margin:0 0 36px;
     line-height:1.6;
+    border-bottom:1px solid var(--line);padding-bottom:28px;
   }
   .contact-info .phone{
     font-family:var(--font-serif);
     font-weight:600;
-    font-size:clamp(20px,3.6vw,26px);
+    font-size:clamp(22px,4vw,28px);
     color:var(--pine-deep);
     text-decoration:none;
     display:inline-block;
+    letter-spacing:0.01em;
   }
+  .contact-info .phone:hover{color:var(--gold);}
   .contact-info .tg{
-    display:block;margin-top:10px;
-    font-family:var(--font-mono);font-size:13px;letter-spacing:0.05em;
-    color:var(--gold);text-decoration:none;
+    display:inline-block;margin-top:16px;
+    font-family:var(--font-mono);font-size:12px;letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--parchment);background:var(--pine);text-decoration:none;
+    padding:12px 22px;border-radius:4px;
   }
-  .contact-info .tg:hover{color:var(--pine-deep);}
+  .contact-info .tg:hover{background:var(--pine-deep);}
 
   /* ================= DOWNLOAD BAND ================= */
   .download-band{padding:64px 0;background:var(--parchment);border-bottom:1px solid var(--line);}
