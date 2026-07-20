@@ -54,7 +54,7 @@ LEFT_COL_RIGHT = W * 0.62
 RIGHT_COL_LEFT = LEFT_COL_RIGHT + COL_GAP
 RIGHT_COL_W = W - MARGIN - RIGHT_COL_LEFT
 
-FOOTER_H = 24 * mm
+FOOTER_H = 34 * mm
 
 # ---------------------------------------------------------
 # QR
@@ -151,7 +151,7 @@ y -= 10 * mm
 
 c.setFillColorRGB(*INK)
 c.setFont("Serif-Bold", 26)
-c.drawCentredString(W / 2, y, "Путеводитель гостя")
+c.drawCentredString(W / 2, y, "Памятка гостя")
 y -= 12 * mm
 
 # ---------- todo checklist (full width) ----------
@@ -181,36 +181,31 @@ col_top_y = y
 TIMELINE_PADDING = 4 * mm
 
 
-def timeline_item(y, time, title, text, is_last=False):
+def timeline_item(y, time, title, is_last=False):
     line_x = MARGIN + 5 * mm
     text_x = MARGIN + 16 * mm
-    text_w = LEFT_COL_RIGHT - text_x
 
-    # Dot
-    c.setFillColorRGB(*CHAMPAGNE)
-    c.circle(line_x, y, 1.3 * mm, stroke=0, fill=1)
+    # Time — large, bold, the anchor of each item
+    c.setFillColorRGB(*INK)
+    c.setFont("Sans-Semi", 11)
+    c.drawString(text_x, y, time)
 
-    # Time
+    # Dot — aligned to time baseline
     c.setFillColorRGB(*CHAMPAGNE)
-    c.setFont("Sans-Medium", 8.5)
-    c.drawString(text_x, y + 0.3 * mm, time)
+    c.circle(line_x, y + 1.5 * mm, 1.6 * mm, stroke=0, fill=1)
 
     # Title
-    c.setFillColorRGB(*INK)
-    c.setFont("Serif-Bold", 12)
-    c.drawString(text_x, y - 4.5 * mm, title)
+    c.setFillColorRGB(*SAGE)
+    c.setFont("Serif-Bold", 13)
+    c.drawString(text_x, y - 5.5 * mm, title)
 
-    # Description — regular weight, readable
-    text_bottom = draw_wrapped(text_x, y - 9 * mm, text, text_w,
-                               font="Serif", size=10, leading=3.8 * mm,
-                               color=INK_LIGHT)
-    next_y = text_bottom - TIMELINE_PADDING
+    next_y = y - 12 * mm
 
     # Connecting line
     if not is_last:
         c.setStrokeColorRGB(*LINE)
         c.setLineWidth(0.5)
-        c.line(line_x, y - 1.3 * mm, line_x, next_y + 1.3 * mm)
+        c.line(line_x, y - 0.2 * mm, line_x, next_y + 3 * mm)
 
     return next_y
 
@@ -219,20 +214,15 @@ section("Маршрут дня", col_top_y)
 y_left = col_top_y - 7 * mm
 
 route = [
-    ("08:30", "Автобус от Автово",
-     "Ждём у метро Автово, Стачек 88. Госномер сообщим накануне."),
-    ("≈ 10:30", "Парк Монрепо",
-     "На входе скажите, что по групповому билету на свадьбу."),
-    ("11:00", "Церемония",
-     "Регистрация в дворце Монрепо, затем прогулка и фото в парке."),
-    ("15:30", "Ресторан",
-     "«Птички и ягоды», Приморское шоссе, 572."),
-    ("≈ 21:00", "Домой",
-     "Выезд из ресторана, приезд к метро Автово около 23:00."),
+    ("08:30", "Автобус от Автово, Стачек 88"),
+    ("11:00", "Парк Монрепо"),
+    ("12:00", "Регистрация"),
+    ("15:30", "Ресторан «Птички и ягоды»"),
+    ("≈ 21:00", "Домой, приезд ≈ 23:00"),
 ]
-for i, (time_label, title, text) in enumerate(route):
+for i, (time_label, title) in enumerate(route):
     is_last = i == len(route) - 1
-    y_left = timeline_item(y_left, time_label, title, text, is_last=is_last)
+    y_left = timeline_item(y_left, time_label, title, is_last=is_last)
 
 # ---------- Vertical divider between columns ----------
 col_divider_x = LEFT_COL_RIGHT + COL_GAP / 2
@@ -274,18 +264,22 @@ c.rect(0, 0, W, FOOTER_H, fill=1, stroke=0)
 footer_cx = W / 2
 footer_mid = FOOTER_H / 2
 
-c.setFillColorRGB(*CHAMPAGNE_LIGHT)
-c.setFont("Sans", 7.5)
-c.drawCentredString(footer_cx, footer_mid + 6 * mm, "ЕСЛИ  ПОТЕРЯЕТЕСЬ")
+c.setFillColorRGB(*CREAM)
+c.setFont("Serif", 11)
+c.drawCentredString(footer_cx, footer_mid + 8 * mm,
+                    "Если потеряетесь или возникнут трудности —")
+c.drawCentredString(footer_cx, footer_mid + 3 * mm,
+                    "обращайтесь к свидетелю Кириллу")
 
 c.setFillColorRGB(*CREAM)
 c.setFont("Serif-Bold", 13)
-c.drawCentredString(footer_cx, footer_mid, "Кирилл")
+c.drawCentredString(footer_cx, footer_mid - 4 * mm,
+                    "+7 910 966 6402")
 
-c.setFillColorRGB(*CREAM)
-c.setFont("Serif", 10.5)
-c.drawCentredString(footer_cx, footer_mid - 5.5 * mm,
-                    "+7 910 966 6402  ·  телеграм @tepa46")
+c.setFillColorRGB(*CHAMPAGNE_LIGHT)
+c.setFont("Sans-Medium", 9)
+c.drawCentredString(footer_cx, footer_mid - 10 * mm,
+                    "телеграм @tepa46")
 
 # ---------------------------------------------------------
 c.showPage()
