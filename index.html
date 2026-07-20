@@ -289,57 +289,36 @@
 
   /* ================= CONTACT ================= */
   .contact-screen{
-    background:var(--parchment-warm);padding:130px 0;
-    position:relative;
-    border-top:1px solid var(--line);
-    border-bottom:1px solid var(--line);
+    background:var(--pine-deep);color:var(--parchment);
+    padding:16vh 0;text-align:center;
   }
-  .contact-grid{
-    display:grid;grid-template-columns:220px 1fr;gap:56px;
-    align-items:center;max-width:660px;margin:0 auto;
-  }
-  @media(max-width:720px){
-    .contact-grid{grid-template-columns:1fr;justify-items:center;text-align:center;gap:40px;}
-    .contact-portrait{max-width:200px;}
-  }
+  .contact-screen .eyebrow{color:var(--gold-soft);display:block;margin-bottom:48px;}
   .contact-portrait{
-    width:100%;aspect-ratio:3/4;object-fit:cover;object-position:center top;
-    border-radius:6px;filter:grayscale(0.15);
-    box-shadow:0 6px 28px rgba(0,0,0,0.1);
+    width:200px;max-width:60%;aspect-ratio:3/4;
+    object-fit:cover;object-position:center top;
+    filter:grayscale(0.15);
+    display:block;margin:0 auto 40px;
   }
-  .contact-info .eyebrow{color:var(--gold);display:block;margin-bottom:18px;}
-  .contact-info h2{
-    font-family:var(--font-serif);
-    font-weight:600;
-    font-style:italic;
-    font-size:clamp(40px,7.5vw,64px);
-    margin:0 0 6px;
-    color:var(--pine-deep);
-    line-height:1.05;
+  .contact-screen h2{
+    font-family:var(--font-serif);font-weight:600;font-style:italic;
+    font-size:clamp(48px,10vw,96px);
+    margin:0 0 8px;color:var(--parchment);
   }
-  .contact-info .role{
-    font-size:15px;color:var(--stone);margin:0 0 30px;
-    line-height:1.6;
+  .contact-screen .role{
+    font-family:var(--font-mono);font-size:12px;letter-spacing:0.12em;
+    text-transform:uppercase;color:var(--mist);margin:0 0 48px;
   }
-  .contact-info .phone{
-    font-family:var(--font-serif);
-    font-weight:600;
-    font-size:clamp(22px,4vw,28px);
-    color:var(--pine-deep);
-    text-decoration:none;
-    display:inline-block;
-    letter-spacing:0.01em;
+  .contact-screen .phone{
+    font-family:var(--font-serif);font-weight:600;
+    font-size:clamp(28px,5vw,38px);
+    color:var(--gold-soft);text-decoration:none;display:inline-block;
   }
-  .contact-info .phone:hover{color:var(--gold);}
-  .contact-info .tg{
-    display:inline-block;margin-top:16px;
-    font-family:var(--font-mono);font-size:12px;letter-spacing:0.08em;
-    text-transform:uppercase;
-    color:var(--parchment);background:var(--pine);text-decoration:none;
-    padding:12px 22px;border-radius:4px;
-    transition:background 0.2s;
+  .contact-screen .tg{
+    display:block;margin-top:14px;
+    font-family:var(--font-mono);font-size:13px;letter-spacing:0.05em;
+    color:var(--mist);text-decoration:none;
   }
-  .contact-info .tg:hover{background:var(--pine-deep);}
+  .contact-screen .tg:hover{color:var(--parchment);}
 
   /* ================= DOWNLOAD BAND ================= */
   .download-band{padding:64px 0;background:var(--parchment);border-bottom:1px solid var(--line);}
@@ -389,61 +368,27 @@
 
   
 /* ================= PHOTO ALBUM SECTION ================= */
-.photos{
-  padding:130px 0;
-  background:var(--parchment-warm);
-  border-top:1px solid var(--line);
-  border-bottom:1px solid var(--line);
-}
-.photos .head{text-align:center;margin-bottom:70px;}
-.photos .head .eyebrow{color:var(--gold);}
-.photos .head h2{
+.photos{padding:130px 0;background:var(--paper);text-align:center;}
+.photos .eyebrow{color:var(--gold);display:block;margin-bottom:48px;}
+.photos h2{
   font-family:var(--font-serif);font-style:italic;font-weight:500;
-  font-size:clamp(32px,5.5vw,52px);margin:12px 0 0;color:var(--pine-deep);
+  font-size:clamp(32px,5.5vw,52px);margin:0 0 20px;color:var(--pine-deep);
 }
-.photos .head .lead{
-  font-size:17px;line-height:1.7;color:#4A473D;max-width:480px;margin:20px auto 0;
+.photos .lead{
+  font-size:17px;line-height:1.7;color:#4A473D;
+  max-width:420px;margin:0 auto 60px;
 }
-
-.album-grid{
-  display:grid;grid-template-columns:auto 1fr;gap:60px;align-items:center;
-  max-width:680px;margin:0 auto;
+.photos .qr-img{
+  width:220px;max-width:70%;display:block;margin:0 auto 24px;
 }
-@media(max-width:640px){
-  .album-grid{grid-template-columns:1fr;justify-items:center;gap:40px;}
+.photos .qr-open{
+  font-family:var(--font-mono);font-size:12px;letter-spacing:0.1em;
+  text-transform:uppercase;color:var(--gold);text-decoration:none;
 }
-
-.album-qr{text-align:center;}
-.album-qr-img{
-  width:200px;max-width:100%;padding:16px;
-  background:var(--paper);border-radius:12px;
-  border:1px solid var(--line);
-  box-shadow:0 6px 30px rgba(0,0,0,0.08);
-}
-.album-qr-link{
-  display:inline-block;margin-top:18px;
-  font-family:var(--font-mono);font-size:12px;letter-spacing:0.1em;text-transform:uppercase;
-  color:var(--gold);text-decoration:none;border-bottom:1px solid rgba(169,130,79,0.3);
-  padding-bottom:2px;
-}
-.album-qr-link:hover{color:var(--pine-deep);border-bottom-color:var(--pine-deep);}
-
-.album-cards{display:flex;flex-direction:column;gap:24px;}
-.album-card{
-  background:var(--paper);border:1px solid var(--line);
-  border-radius:10px;padding:24px 28px;
-  box-shadow:0 2px 12px rgba(0,0,0,0.04);
-}
-.album-card-num{
-  font-family:var(--font-mono);font-size:11px;letter-spacing:0.15em;
-  text-transform:uppercase;color:var(--gold);margin:0 0 8px;
-}
-.album-card-title{
-  font-family:var(--font-serif);font-weight:600;
-  font-size:19px;color:var(--pine-deep);margin:0 0 8px;
-}
-.album-card-desc{
-  font-size:14.5px;line-height:1.7;color:#4A473D;margin:0;
+.photos .qr-open:hover{color:var(--pine-deep);}
+.photos .qr-note{
+  font-size:15px;line-height:1.8;color:var(--stone);
+  max-width:380px;margin:48px auto 0;
 }
 
 @media(prefers-reduced-motion:no-preference){
@@ -615,16 +560,12 @@
 <!-- ============ КОНТАКТ ============ -->
 <section class="contact-screen">
   <div class="wrap">
-    <div class="contact-grid">
-      <img class="contact-portrait" src="kirill.png" alt="Кирилл">
-      <div class="contact-info">
-        <span class="eyebrow">Если потеряетесь</span>
-        <h2>Кирилл</h2>
-        <p class="role">Свидетель жениха, на связи весь день</p>
-        <a class="phone" href="tel:+79109666402">+7 910 966 64 02</a>
-        <a class="tg" href="https://t.me/tepa46">Telegram @tepa46</a>
-      </div>
-    </div>
+    <span class="eyebrow">Если потеряетесь</span>
+    <img class="contact-portrait" src="kirill.png" alt="Кирилл">
+    <h2>Кирилл</h2>
+    <p class="role">свидетель жениха</p>
+    <a class="phone" href="tel:+79109666402">+7 910 966 64 02</a>
+    <a class="tg" href="https://t.me/tepa46">Telegram @tepa46</a>
   </div>
 </section>
 
@@ -702,32 +643,12 @@
 <!-- ============ ФОТО / QR ============ -->
 <section class="photos">
   <div class="wrap">
-    <div class="head">
-      <span class="eyebrow">Фотографии</span>
-      <h2>Общий альбом дня</h2>
-      <p class="lead">Скидывайте свои кадры и ищите себя на&nbsp;фотографиях&nbsp;— всё в&nbsp;одном месте.</p>
-    </div>
-
-    <div class="album-grid">
-      <div class="album-qr">
-        <img class="album-qr-img" alt="QR — альбомы свадьбы" src="qr.svg">
-        <br>
-        <a class="album-qr-link" href="https://disk.yandex.ru/d/k483YWgfwVIvRw">Открыть альбом ↗</a>
-      </div>
-
-      <div class="album-cards">
-        <div class="album-card">
-          <p class="album-card-num">01</p>
-          <p class="album-card-title">Ваши кадры</p>
-          <p class="album-card-desc">Загружайте фото с&nbsp;телефона прямо в&nbsp;общий альбом&nbsp;— чем больше, тем лучше.</p>
-        </div>
-        <div class="album-card">
-          <p class="album-card-num">02</p>
-          <p class="album-card-title">От фотографа</p>
-          <p class="album-card-desc">Профессиональные снимки появятся чуть позже&nbsp;— заглядывайте и ищите себя!</p>
-        </div>
-      </div>
-    </div>
+    <span class="eyebrow">Фотографии</span>
+    <h2>Общий альбом дня</h2>
+    <p class="lead">Скидывайте свои кадры и ищите себя на&nbsp;фотографиях&nbsp;— всё в&nbsp;одном месте.</p>
+    <img class="qr-img" alt="QR — альбомы свадьбы" src="qr.svg">
+    <a class="qr-open" href="https://disk.yandex.ru/d/k483YWgfwVIvRw">Открыть альбом ↗</a>
+    <p class="qr-note">Загружайте фото с&nbsp;телефона прямо в&nbsp;альбом. Профессиональные снимки появятся чуть позже&nbsp;— заглядывайте и&nbsp;ищите себя!</p>
   </div>
 </section>
 
