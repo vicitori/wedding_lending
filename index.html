@@ -287,47 +287,42 @@
 
   /* ================= CONTACT ================= */
   .contact-screen{
-    position:relative;overflow:hidden;
-    color:var(--parchment);padding:18vh 0;text-align:center;
+    background:var(--pine-deep);color:var(--parchment);
+    padding:120px 0;
   }
-  .contact-bg{
-    position:absolute;inset:0;z-index:0;
-    background:var(--pine-deep);
+  .contact-grid{
+    display:grid;grid-template-columns:280px 1fr;gap:60px;
+    align-items:center;max-width:700px;margin:0 auto;
   }
-  .contact-bg img{
-    width:100%;height:100%;object-fit:cover;object-position:center 20%;
-    opacity:0.25;filter:grayscale(0.5);
+  @media(max-width:720px){
+    .contact-grid{grid-template-columns:1fr;justify-items:center;text-align:center;gap:40px;}
   }
-  .contact-bg::after{
-    content:'';position:absolute;inset:0;
-    background:linear-gradient(to bottom,
-      var(--pine-deep) 0%,
-      rgba(15,22,16,0.6) 40%,
-      rgba(15,22,16,0.7) 60%,
-      var(--pine-deep) 100%
-    );
+  .contact-portrait{
+    width:100%;aspect-ratio:3/4;object-fit:cover;object-position:center top;
+    border-radius:6px;filter:grayscale(0.1);
+    box-shadow:0 8px 40px rgba(0,0,0,0.4);
   }
-  .contact-screen .wrap{position:relative;z-index:1;}
-  .contact-screen .eyebrow{color:var(--gold-soft);display:block;margin-bottom:26px;}
-  .contact-screen h2{
+  .contact-info .eyebrow{color:var(--gold-soft);display:block;margin-bottom:20px;}
+  .contact-info h2{
     font-family:var(--font-serif);
     font-weight:600;
     font-style:italic;
-    font-size:clamp(48px,10vw,96px);
-    margin:0 0 10px;
+    font-size:clamp(42px,8vw,72px);
+    margin:0 0 8px;
     color:var(--parchment);
+    line-height:1;
   }
-  .contact-screen .role{font-size:15px;color:var(--mist);margin:0 0 46px;}
-  .contact-screen .phone{
+  .contact-info .role{font-size:15px;color:var(--mist);margin:0 0 36px;}
+  .contact-info .phone{
     font-family:var(--font-serif);
     font-weight:600;
-    font-size:clamp(28px,5vw,38px);
+    font-size:clamp(22px,4vw,30px);
     color:var(--gold-soft);
     text-decoration:none;
     display:inline-block;
   }
-  .contact-screen .tg{display:block;margin-top:14px;font-family:var(--font-mono);font-size:13px;letter-spacing:0.05em;color:var(--mist);text-decoration:none;}
-  .contact-screen .tg:hover{color:var(--parchment);}
+  .contact-info .tg{display:block;margin-top:14px;font-family:var(--font-mono);font-size:13px;letter-spacing:0.05em;color:var(--mist);text-decoration:none;}
+  .contact-info .tg:hover{color:var(--parchment);}
 
   /* ================= DOWNLOAD BAND ================= */
   .download-band{padding:64px 0;background:var(--parchment);border-bottom:1px solid var(--line);}
@@ -674,15 +669,17 @@
 
 <!-- ============ КОНТАКТ ============ -->
 <section class="contact-screen">
-  <div class="contact-bg">
-    <img src="kirill.png" alt="">
-  </div>
   <div class="wrap">
-    <span class="eyebrow">Если потеряетесь</span>
-    <h2>Кирилл</h2>
-    <p class="role">Свидетель, на связи весь день</p>
-    <a class="phone" href="tel:+79109666402">+7 910 966 64 02</a>
-    <a class="tg" href="https://t.me/tepa46">Telegram @tepa46</a>
+    <div class="contact-grid">
+      <img class="contact-portrait" src="kirill.png" alt="Кирилл">
+      <div class="contact-info">
+        <span class="eyebrow">Если потеряетесь</span>
+        <h2>Кирилл</h2>
+        <p class="role">Свидетель, на связи весь день</p>
+        <a class="phone" href="tel:+79109666402">+7 910 966 64 02</a>
+        <a class="tg" href="https://t.me/tepa46">Telegram @tepa46</a>
+      </div>
+    </div>
   </div>
 </section>
 
