@@ -96,7 +96,7 @@
   .hero-main{position:relative;z-index:2;padding:0 32px;display:flex;flex-direction:column;align-items:center;text-align:center;max-width:900px;margin:0 auto;}
   .hero-num{
     font-weight:700;
-    font-size:clamp(200px,42vw,440px);
+    font-size:clamp(170px,35vw,380px);
     line-height:0.78;
     margin:0;
     color:var(--parchment);
@@ -106,16 +106,16 @@
     font-style:italic;
     font-weight:500;
     font-size:clamp(30px,5.5vw,52px);
-    margin:24px 0 0;
+    margin:32px 0 0;
     color:var(--gold-soft);
   }
   .hero-tagline{
     text-align:center;
     font-weight:400;
-    font-size:clamp(22px,4vw,34px);
-    line-height:1.35;
-    max-width:480px;
-    margin:52px 0 0;
+    font-size:clamp(21px,3.8vw,32px);
+    line-height:1.38;
+    max-width:440px;
+    margin:56px 0 0;
     color:#E6E0CE;
   }
   .hero-bottom{position:absolute;left:50%;transform:translateX(-50%);bottom:40px;z-index:2;text-align:center;display:block;width:100%;}
@@ -167,7 +167,7 @@
     content:'';position:absolute;left:27px;top:28px;bottom:28px;width:1px;
     background:linear-gradient(to bottom,var(--gold-soft),var(--gold) 20%,var(--gold) 80%,var(--gold-soft));
   }
-  .tl-stop{position:relative;padding:0 0 64px;}
+  .tl-stop{position:relative;padding:0 0 80px;}
   .tl-stop:last-child{padding-bottom:0;}
 
   /* dot / icon circle */
@@ -176,12 +176,11 @@
     width:56px;height:56px;
     border-radius:50%;
     background:var(--paper);
-    border:1.5px solid var(--gold);
+    border:1px solid var(--line);
     display:flex;align-items:center;justify-content:center;
-    box-shadow:0 2px 12px rgba(169,130,79,0.12);
     z-index:1;
   }
-  .tl-dot svg{width:26px;height:26px;color:var(--gold);}
+  .tl-dot svg{width:26px;height:26px;color:var(--gold);opacity:0.7;}
 
   /* content */
   .tl-time{
@@ -200,7 +199,7 @@
     .timeline::before{left:35px;}
     .tl-dot{left:-96px;width:72px;height:72px;}
     .tl-dot svg{width:32px;height:32px;}
-    .tl-stop{padding-bottom:72px;}
+    .tl-stop{padding-bottom:88px;}
   }
 
   /* ================= EDITORIAL SECTION ================= */
@@ -263,19 +262,12 @@
   }
   .poster-street{
     font-family:var(--font-serif);font-weight:700;
-    font-size:clamp(48px,10vw,90px);line-height:0.9;
-    margin:0;color:var(--pine-deep);letter-spacing:-0.02em;
-    text-transform:uppercase;
-  }
-  .poster-num{
-    font-family:var(--font-serif);font-weight:600;
-    font-size:clamp(36px,7vw,64px);line-height:1;
-    margin:0;color:var(--gold);
-    padding-left:clamp(40px,8vw,90px);
+    font-size:clamp(36px,7.5vw,56px);line-height:1.1;
+    margin:0;color:var(--pine-deep);letter-spacing:-0.01em;
   }
   .poster-metro{
     font-family:var(--font-mono);font-size:14px;letter-spacing:0.08em;
-    color:var(--stone);margin:24px 0 0;
+    color:var(--stone);margin:20px 0 0;
   }
   .poster-note{
     font-size:16px;line-height:1.75;color:#4A473D;
@@ -326,7 +318,7 @@
   }
   .contact-screen .eyebrow{color:var(--gold);display:block;margin-bottom:48px;}
   .contact-portrait{
-    width:260px;max-width:65%;aspect-ratio:3/4;
+    width:280px;max-width:70%;aspect-ratio:3/4;
     object-fit:cover;object-position:center top;
     filter:grayscale(0.12);
     display:block;margin:0 auto 44px;
@@ -385,7 +377,7 @@
   }
   /* tablet: hero numeral was overflowing/too dominant between 720–1000px */
   @media(max-width:1000px){
-    .hero-num{font-size:clamp(140px,32vw,280px);}
+    .hero-num{font-size:clamp(130px,28vw,240px);}
   }
   /* very wide monitors: hero felt like an empty void at full 100vh */
   @media(min-width:1400px){
@@ -589,11 +581,10 @@
     <div class="poster-address">
       <p class="poster-time">08:30</p>
       <hr class="poster-rule">
-      <p class="poster-street">Стачек</p>
-      <p class="poster-num">88</p>
+      <p class="poster-street">пр. Стачек, 88</p>
       <p class="poster-metro">м. Автово</p>
-      <p class="poster-note">Автобус уже будет ждать вас. Госномер сообщим накануне. Пожалуйста, не опаздывайте&nbsp;— ждать больше 5–10&nbsp;минут автобус не сможет.</p>
-      <p class="caption-line">Если потеряетесь&nbsp;— контакты свидетеля Кирилла ниже.</p>
+      <p class="poster-note">Автобус уже будет ждать вас. Госномер сообщим накануне.</p>
+      <p class="caption-line">Если потеряетесь&nbsp;— ищите Кирилла, его контакты ниже.</p>
     </div>
   </div>
 </section>
@@ -601,7 +592,7 @@
 <!-- ============ КОНТАКТ ============ -->
 <section class="contact-screen">
   <div class="wrap">
-    <span class="eyebrow">Если потеряетесь</span>
+    <p style="font-style:italic;font-size:18px;color:var(--stone);margin:0 0 48px;">Если потеряетесь&nbsp;— ищите Кирилла.</p>
     <img class="contact-portrait" src="kirill.png" alt="Кирилл">
     <h2>Кирилл</h2>
     <p class="role">свидетель жениха</p>
@@ -714,10 +705,10 @@
 <section class="photos">
   <div class="wrap">
     <span class="eyebrow">Фотографии</span>
-    <h2>Общий альбом дня</h2>
+    <p class="lead">Здесь будут все воспоминания<br>этого дня.</p>
     <img class="qr-img" alt="QR — альбомы свадьбы" src="qr.svg">
     <a class="qr-open" href="https://disk.yandex.ru/d/k483YWgfwVIvRw">Открыть альбом ↗</a>
-    <p class="qr-note">После свадьбы именно здесь появятся ваши воспоминания.<br>Скидывайте кадры с&nbsp;телефона, а&nbsp;снимки фотографа появятся чуть позже.</p>
+    <p class="qr-note">
   </div>
 </section>
 
@@ -743,9 +734,9 @@
 <!-- ============ ФИНАЛ ============ -->
 <section class="final">
   <div class="wrap">
-    <p class="hero-num" style="color:var(--parchment);font-size:clamp(120px,28vw,280px);margin:0;line-height:0.8;">25</p>
-    <p class="hero-month" style="margin:16px 0 0;">июля</p>
-    <h2 style="margin-top:48px;">Спасибо,<br>что будете рядом.</h2>
+    <span class="eyebrow">До встречи</span>
+    <h2>25 июля</h2>
+    <p style="font-style:italic;font-size:clamp(20px,3.6vw,28px);color:#E6E0CE;margin:24px 0 0;line-height:1.45;">Спасибо,<br>что будете рядом.</p>
     <svg class="fig" width="46" height="30" viewBox="0 0 46 30" fill="none" xmlns="http://www.w3.org/2000/svg">
       <circle cx="18" cy="15" r="11.5" stroke="var(--gold-soft)" stroke-width="1"/>
       <circle cx="29" cy="15" r="11.5" stroke="var(--gold-soft)" stroke-width="1"/>
