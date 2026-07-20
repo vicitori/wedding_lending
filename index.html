@@ -147,17 +147,20 @@
 
   /* ================= ROUTE (journal spine) ================= */
   .route-section{background:var(--paper);padding:150px 0 130px;position:relative;}
-  .route-heading{margin:0 0 20px;}
+  .route-heading{margin:0 0 20px;text-align:center;}
   .route-heading .eyebrow{color:var(--gold);}
   .route-heading h2{
     font-family:var(--font-serif);
     font-style:italic;
     font-weight:500;
-    font-size:clamp(30px,5vw,44px);
-    margin:10px 0 0;
+    font-size:clamp(34px,6vw,56px);
+    margin:16px 0 0;
     color:var(--pine-deep);
   }
-  .route-intro{font-size:16px;line-height:1.8;color:#4A473D;max-width:420px;margin:22px 0 0;}
+  .route-intro{
+    font-style:italic;font-size:17px;line-height:1.8;color:var(--stone);
+    max-width:380px;margin:24px auto 0;
+  }
 
   .route-body{position:relative;margin-top:80px;}
 
@@ -473,7 +476,8 @@
     <div class="route-heading">
       <p class="eyebrow">Маршрут дня</p>
       <h2>Как пройдёт день</h2>
-      <p class="route-intro">Передвигаться будем вместе на автобусе. План такой:</p>
+      <hr style="width:60px;height:1px;background:var(--gold);border:none;margin:28px auto 0;opacity:0.5;">
+      <p class="route-intro">Передвигаться будем вместе на&nbsp;автобусе.  План такой:</p>
     </div>
 
     <div class="route-body">
@@ -521,25 +525,20 @@
 
 
 
-<!-- ============ 01 ВСТРЕЧАЕМСЯ ЗДЕСЬ ============ -->
+<!-- ============ 01 АВТОБУС ============ -->
 <section class="story">
   <div class="wrap">
-    <div class="story-head">
-      <h2>Встречаемся здесь</h2>
-    </div>
+    <p class="eyebrow" style="color:var(--gold);margin:0 0 16px;">Отправление</p>
 
-    <div class="big-num-block" style="margin-top:40px;">
+    <div class="big-num-block" style="margin-top:0;">
       <p class="big-num">8:30</p>
     </div>
 
-    <hr style="width:100%;max-width:360px;height:1px;background:var(--gold);border:none;margin:48px 0 48px;opacity:0.5;">
+    <p style="font-family:var(--font-serif);font-weight:600;font-size:clamp(20px,3.6vw,26px);color:var(--pine-deep);margin:48px 0 0;">пр. Стачек, 88</p>
+    <p class="caption-line" style="margin-top:8px;">м. Автово</p>
 
-    <p style="font-family:var(--font-serif);font-weight:600;font-size:clamp(20px,3.6vw,26px);color:var(--pine-deep);margin:0;">пр. Стачек, 88</p>
-    <p class="caption-line" style="margin-top:10px;">м. Автово</p>
-
-    <div class="dropcap" style="margin-top:48px;">
-      <p>Автобус Yutong будет ждать вас неподалёку от станции метро Автово. Базовая точка&nbsp;— пр.&nbsp;Стачек,&nbsp;88. Если там не получится припарковаться, автобус будет стоять чуть дальше по проспекту или на соседней улице.</p>
-      <p>Госномер автобуса сообщим вечером накануне.</p>
+    <div class="dropcap" style="margin-top:56px;">
+      <p>Автобус Yutong будет ждать вас неподалёку от станции метро. Если у дома не получится припарковаться, он будет стоять чуть дальше по проспекту или на соседней улице. Госномер сообщим вечером накануне.</p>
     </div>
   </div>
 </section>
