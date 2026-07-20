@@ -96,7 +96,7 @@
   .hero-main{position:relative;z-index:2;padding:0 32px;display:flex;flex-direction:column;align-items:center;text-align:center;max-width:900px;margin:0 auto;}
   .hero-num{
     font-weight:700;
-    font-size:clamp(170px,35vw,380px);
+    font-size:clamp(150px,30vw,320px);
     line-height:0.78;
     margin:0;
     color:var(--parchment);
@@ -377,7 +377,7 @@
   }
   /* tablet: hero numeral was overflowing/too dominant between 720–1000px */
   @media(max-width:1000px){
-    .hero-num{font-size:clamp(130px,28vw,240px);}
+    .hero-num{font-size:clamp(120px,26vw,220px);}
   }
   /* very wide monitors: hero felt like an empty void at full 100vh */
   @media(min-width:1400px){
@@ -441,11 +441,11 @@
   <div class="hero-main">
     <p class="hero-num">25</p>
     <p class="hero-month">июля, суббота</p>
-    <p class="hero-tagline">Один день, который мы будем<br>вспоминать всю жизнь.</p>
+    <p class="hero-tagline">Дорогие гости нашей свадьбы!</p>
+    <p style="font-size:clamp(14px,2.4vw,17px);line-height:1.75;color:var(--mist);max-width:400px;margin:28px 0 0;text-align:center;">Мы собрали на этой странице всю информацию, которая поможет вам спокойно провести этот день вместе с&nbsp;нами.</p>
   </div>
 
   <div class="hero-bottom wrap">
-    <p class="hero-line">Дорогие гости, мы собрали здесь всё необходимое, чтобы вам было удобно.</p>
   </div>
 </section>
 
@@ -570,21 +570,23 @@
   </svg>
 </div>
 
-<!-- ============ 01 ПУНКТ ОТПРАВЛЕНИЯ ============ -->
+<!-- ============ 01 МЕСТО СБОРА ============ -->
 <section class="story">
   <div class="wrap">
     <div class="story-head">
       <span class="idx">01</span>
-      <h2>Пункт отправления</h2>
+      <h2>Место сбора</h2>
     </div>
 
-    <div class="poster-address">
-      <p class="poster-time">08:30</p>
-      <hr class="poster-rule">
-      <p class="poster-street">пр. Стачек, 88</p>
-      <p class="poster-metro">м. Автово</p>
-      <p class="poster-note">Автобус уже будет ждать вас. Госномер сообщим накануне.</p>
-      <p class="caption-line">Если потеряетесь&nbsp;— ищите Кирилла, его контакты ниже.</p>
+    <div class="big-num-block" style="margin-top:40px;">
+      <p class="big-num">8:30</p>
+      <p class="big-num-sub" style="font-size:clamp(22px,4vw,30px);font-weight:600;margin-top:28px;"><strong>пр. Стачек,&nbsp;88</strong></p>
+      <p class="caption-line" style="margin-top:10px;">м. Автово</p>
+    </div>
+
+    <div class="dropcap" style="margin-top:48px;">
+      <p>Автобус Yutong будет ждать вас неподалёку от станции метро Автово. Если у дома не получится припарковаться, он будет стоять чуть дальше по проспекту или на соседней улице.</p>
+      <p>Госномер автобуса сообщим вечером накануне.</p>
     </div>
   </div>
 </section>
@@ -592,7 +594,7 @@
 <!-- ============ КОНТАКТ ============ -->
 <section class="contact-screen">
   <div class="wrap">
-    <p style="font-style:italic;font-size:18px;color:var(--stone);margin:0 0 48px;">Если потеряетесь&nbsp;— ищите Кирилла.</p>
+    <p style="font-style:italic;font-size:18px;line-height:1.65;color:var(--stone);max-width:400px;margin:0 auto 48px;">Если потеряетесь или возникнут любые трудности&nbsp;— обращайтесь к&nbsp;Кириллу.</p>
     <img class="contact-portrait" src="kirill.png" alt="Кирилл">
     <h2>Кирилл</h2>
     <p class="role">свидетель жениха</p>
@@ -660,30 +662,30 @@
       <h2>Ресторан</h2>
     </div>
 
-    <!-- название как плакат -->
-    <div style="margin:40px 0 0;position:relative;">
-      <!-- иллюстрация: ветка с ягодами -->
-      <svg class="deco" width="140" height="180" viewBox="0 0 140 180" style="right:-60px;top:-20px;" xmlns="http://www.w3.org/2000/svg">
-        <path d="M70 180V40" stroke="var(--gold)" stroke-width="0.8"/>
-        <path d="M70 130C50 130 38 115 38 90" stroke="var(--gold)" stroke-width="0.7" fill="none"/>
-        <path d="M70 90C90 90 102 75 102 50" stroke="var(--gold)" stroke-width="0.7" fill="none"/>
-        <path d="M70 60C55 60 45 48 45 30" stroke="var(--gold)" stroke-width="0.7" fill="none"/>
-        <circle cx="38" cy="90" r="4" fill="var(--gold)" opacity="0.5"/>
-        <circle cx="102" cy="50" r="3" fill="var(--gold)" opacity="0.4"/>
-        <circle cx="45" cy="30" r="3.5" fill="var(--gold)" opacity="0.45"/>
-        <circle cx="38" cy="85" r="2.5" fill="var(--gold)" opacity="0.3"/>
-        <circle cx="102" cy="55" r="2" fill="var(--gold)" opacity="0.3"/>
-        <!-- птичка -->
-        <path d="M85 25C88 22 92 23 90 26C92 24 95 25 93 28" stroke="var(--gold)" stroke-width="0.6" fill="none" opacity="0.4"/>
+    <div style="position:relative;">
+      <!-- иллюстрация: ветка с ягодами и птичкой -->
+      <svg class="deco" width="160" height="200" viewBox="0 0 160 200" style="right:-50px;top:0;" xmlns="http://www.w3.org/2000/svg">
+        <path d="M80 200V50" stroke="var(--gold)" stroke-width="0.8"/>
+        <path d="M80 150C58 150 44 132 44 105" stroke="var(--gold)" stroke-width="0.7" fill="none"/>
+        <path d="M80 110C102 110 116 92 116 65" stroke="var(--gold)" stroke-width="0.7" fill="none"/>
+        <path d="M80 75C63 75 52 60 52 40" stroke="var(--gold)" stroke-width="0.7" fill="none"/>
+        <circle cx="44" cy="105" r="4.5" fill="var(--gold)" opacity="0.4"/>
+        <circle cx="44" cy="99" r="3" fill="var(--gold)" opacity="0.25"/>
+        <circle cx="116" cy="65" r="3.5" fill="var(--gold)" opacity="0.35"/>
+        <circle cx="52" cy="40" r="4" fill="var(--gold)" opacity="0.4"/>
+        <circle cx="52" cy="34" r="2.5" fill="var(--gold)" opacity="0.2"/>
+        <path d="M100 30C104 26 109 27 106 31C109 28 113 30 110 34" stroke="var(--gold)" stroke-width="0.7" fill="none" opacity="0.45"/>
       </svg>
 
-      <p class="caption-line" style="margin:0 0 16px;">Приморское шоссе, 572</p>
-      <p style="font-family:var(--font-serif);font-weight:700;font-style:italic;font-size:clamp(42px,9vw,80px);line-height:1;margin:0;color:var(--pine-deep);">Птички<br>и&nbsp;ягоды</p>
+      <div class="dropcap">
+        <p>После регистрации и прогулки по Монрепо мы все вместе отправимся сюда праздновать.</p>
+      </div>
     </div>
 
     <div class="big-num-block">
       <p class="big-num">15:30</p>
-      <p class="big-num-sub">Кормить будем сытно, вкусно и разнообразно, но только в районе этого времени. Так что, пожалуйста, <strong>плотно позавтракайте</strong>. Примерно в&nbsp;21:00 выезжаем, приезд к&nbsp;метро Автово около&nbsp;23:00.</p>
+      <p class="big-num-sub">Ужин начнётся примерно в это время. Пожалуйста, <strong>плотно позавтракайте</strong>. Примерно в&nbsp;21:00 выезжаем, приезд к&nbsp;метро Автово около&nbsp;23:00.</p>
+      <p class="caption-line">Приморское шоссе, 572</p>
     </div>
   </div>
 </section>
@@ -705,10 +707,9 @@
 <section class="photos">
   <div class="wrap">
     <span class="eyebrow">Фотографии</span>
-    <p class="lead">Здесь будут все воспоминания<br>этого дня.</p>
+    <p class="lead">Именно здесь после свадьбы появятся фотографии фотографа, а&nbsp;ещё будем рады вашим снимкам и&nbsp;видео.</p>
     <img class="qr-img" alt="QR — альбомы свадьбы" src="qr.svg">
     <a class="qr-open" href="https://disk.yandex.ru/d/k483YWgfwVIvRw">Открыть альбом ↗</a>
-    <p class="qr-note">
   </div>
 </section>
 
@@ -734,9 +735,8 @@
 <!-- ============ ФИНАЛ ============ -->
 <section class="final">
   <div class="wrap">
-    <span class="eyebrow">До встречи</span>
-    <h2>25 июля</h2>
-    <p style="font-style:italic;font-size:clamp(20px,3.6vw,28px);color:#E6E0CE;margin:24px 0 0;line-height:1.45;">Спасибо,<br>что будете рядом.</p>
+    <h2>Очень ждём этого дня<br>и встречи с&nbsp;вами!</h2>
+    <p style="font-family:var(--font-mono);font-size:13px;letter-spacing:0.1em;color:var(--mist);margin:32px 0 0;text-transform:uppercase;">Виктория и Владислав</p>
     <svg class="fig" width="46" height="30" viewBox="0 0 46 30" fill="none" xmlns="http://www.w3.org/2000/svg">
       <circle cx="18" cy="15" r="11.5" stroke="var(--gold-soft)" stroke-width="1"/>
       <circle cx="29" cy="15" r="11.5" stroke="var(--gold-soft)" stroke-width="1"/>
