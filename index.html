@@ -248,6 +248,39 @@
   /* big number moment */
   .big-num-block{margin:80px 0 0;}
   .big-num{font-family:var(--font-serif);font-weight:600;font-size:clamp(120px,20vw,220px);line-height:0.85;margin:0;color:var(--pine-deep);letter-spacing:-0.01em;}
+
+  /* ---- poster address ---- */
+  .poster-address{margin:80px 0 0;}
+  .poster-time{
+    font-family:var(--font-serif);font-weight:600;
+    font-size:clamp(80px,16vw,140px);line-height:0.85;
+    margin:0;color:var(--pine-deep);letter-spacing:-0.01em;
+  }
+  .poster-rule{
+    width:100%;max-width:400px;height:1px;
+    background:var(--line);border:none;
+    margin:28px 0 32px;
+  }
+  .poster-street{
+    font-family:var(--font-serif);font-weight:700;
+    font-size:clamp(48px,10vw,90px);line-height:0.9;
+    margin:0;color:var(--pine-deep);letter-spacing:-0.02em;
+    text-transform:uppercase;
+  }
+  .poster-num{
+    font-family:var(--font-serif);font-weight:600;
+    font-size:clamp(36px,7vw,64px);line-height:1;
+    margin:0;color:var(--gold);
+    padding-left:clamp(40px,8vw,90px);
+  }
+  .poster-metro{
+    font-family:var(--font-mono);font-size:14px;letter-spacing:0.08em;
+    color:var(--stone);margin:24px 0 0;
+  }
+  .poster-note{
+    font-size:16px;line-height:1.75;color:#4A473D;
+    max-width:400px;margin:32px 0 0;
+  }
   .story.on-pine .big-num{color:var(--parchment);}
   .big-num-sub{font-size:16px;line-height:1.75;color:#4A473D;max-width:440px;margin:22px 0 0;}
   .story.on-pine .big-num-sub{color:#D9D2BE;}
@@ -545,21 +578,21 @@
   </svg>
 </div>
 
-<!-- ============ 01 АВТОБУС ============ -->
+<!-- ============ 01 ПУНКТ ОТПРАВЛЕНИЯ ============ -->
 <section class="story">
   <div class="wrap">
     <div class="story-head">
       <span class="idx">01</span>
-      <h2>Автобус и сбор</h2>
-    </div>
-    <div class="dropcap">
-      <p>Дорогие гости нашей свадьбы! Рассказываем подробнее обо всех организационных моментах, связанных с нашим замечательным днём.</p>
-      <p>Автобус Yutong будет ждать вас неподалёку от станции метро Автово. Госномер сообщим вечером накануне.</p>
+      <h2>Пункт отправления</h2>
     </div>
 
-    <div class="big-num-block">
-      <p class="big-num">8:30</p>
-      <p class="big-num-sub">Отправление от <strong>пр. Стачек,&nbsp;88</strong> у метро Автово. Большая просьба не опаздывать&nbsp;— ждать больше 5–10&nbsp;минут автобус не сможет.</p>
+    <div class="poster-address">
+      <p class="poster-time">08:30</p>
+      <hr class="poster-rule">
+      <p class="poster-street">Стачек</p>
+      <p class="poster-num">88</p>
+      <p class="poster-metro">м. Автово</p>
+      <p class="poster-note">Автобус уже будет ждать вас. Госномер сообщим накануне. Пожалуйста, не опаздывайте&nbsp;— ждать больше 5–10&nbsp;минут автобус не сможет.</p>
       <p class="caption-line">Если потеряетесь&nbsp;— контакты свидетеля Кирилла ниже.</p>
     </div>
   </div>
